@@ -1,3 +1,6 @@
+//위에건 내가 푼 거고
+//아래꺼는 Discussion의 맨 위의 코드를 참조.
+//정말 와...라는 소리밖에 안나온다. ㅋㅋ
 class Solution {
 public:
     //26분 36초.
@@ -32,3 +35,36 @@ public:
         
     }
 };
+
+class Solution {
+public:
+    int reverse(int x) {
+        int y=0;
+        while(x){
+            if(y>INT_MAX/10 || y<INT_MIN/10){
+                return 0;
+            }else{
+                y=y*10 +x%10;
+                x=x/10;
+            }
+        }
+        return y;
+    }
+};
+
+/*
+y = 3, x = 12
+y = 32, x = 1
+y = 321, x = 0
+
+x = -123
+
+y = -123 mod 10 = -3, x = -12
+y = -32, x = -1
+
+x = 1,234,567,899
+
+y = 998, 765, 432, x = 1
+
+
+*/
