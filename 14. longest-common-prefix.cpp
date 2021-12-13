@@ -8,6 +8,9 @@
 //기존 해결 방법: N^2번 for문을 돌았음. 
 //근데 이럴 필요가 없이 그냥 N번만 돌면 됨.
 //prefix(S1, S2, S3, ..., Sn) = prefix(...prefix(S1, S2), S3), S4), ... , Sn)
+
+//아래의 방법들 외에도, 이분탐색, Trie 들로 푸는 방법이 있으니 더 참고해보자.
+//https://leetcode.com/problems/longest-common-prefix/solution/
 /*
 Runtime: 4 ms, faster than 71.16% of C++ online submissions for Longest Common Prefix.
 Memory Usage: 9.6 MB, less than 13.41% of C++ online submissions for Longest Common Prefix.
