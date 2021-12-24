@@ -43,6 +43,7 @@ public:
         for(int i=start ; i <nums.size(); i++){
             if(i == start || nums[i-1] != nums[i]){
                 for(vector<int>& subset: kSum(nums, target-nums[i], i+1, k-1)){
+                    //i번째 숫자를 선택하고, start는 i+1, k는k-1, target은 target-nums[i]로 바꾼 함수를 호출한 결과가 리턴한 vector<vector<int>>를 순회하면서 값들을 담는다.
                     res.push_back({nums[i]});
                     res.back().insert(end(res.back()), begin(subset), end(subset));
                 }
