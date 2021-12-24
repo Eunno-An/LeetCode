@@ -8,6 +8,9 @@ Follow-up은 ListNode를 한 번만 순회하라고 하는 것이였음.
 그래서 이걸 저장할 벡터를 따로 선언하였음.
 
 그리고 n이 1 또는 sz일 때 예외처리만 해 주었음.
+
+Discuss에 더 좋은 풀이가 있어서 아래 추가하였음.
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/discuss/1164542/JS-Python-Java-C%2B%2B-or-Easy-Two-Pointer-Solution-w-Explanation
 */
 
 /**
@@ -51,5 +54,17 @@ public:
         
         lists[lists.size()-n-1]->next = lists[lists.size()-n+1];
         return lists[0];
+    }
+};
+
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode *fast = head, *slow = head;
+        for (int i = 0; i < n; i++) fast = fast->next;
+        if (!fast) return head->next;
+        while (fast->next) fast = fast->next, slow = slow->next;
+        slow->next = slow->next->next;
+        return head;
     }
 };
