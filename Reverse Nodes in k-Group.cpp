@@ -16,7 +16,7 @@
  */
 class Solution {
 public:
-    ListNode* getNodeAfterK(ListNode* head, int k) {
+    ListNode* getNodeAfterK(ListNode* head, int k) {//사실 이것도 이렇게 하기보단, 리스트의 길이가 k를 넘어가는지 안넘어가는지로 따지는게 더 맞음.
         while(head != NULL && --k != 0){//--k로 해야함.
             head = head->next;
         }
@@ -40,5 +40,63 @@ public:
         
         head->next = reverseKGroup(curr, k);
         return prev;//왜 prev를 리턴하는지 알아놓을것.
+    }
+};
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int getLengthOfLinkedList(ListNode* head){
+        ListNode* ptr = head;
+        int cnt = 0;
+        while(ptr){
+            cnt++;
+            ptr = ptr->next;
+        }
+        return cnt;
+    }
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        if(!head)
+            return NULL;
+        int len = getLengthOfLinkedList(head);
+        if(len < k)
+            return head;
+        
+        int numberOfGrouptsToReverse = len/k;
+        
+        //진짜 dummyNode는 나중에 쉽게 결과값을 리턴하기 위해서 쓰인다!! 
+        //이제 반복문에 실제로 필요한 노드는 start, 그리고 우리가 재귀에서 쓰던 prev, curr, next임!!!!
+        //start는 재귀에서 쓰던 head같은 느낌인거지.
+        ListNode* dummyNode = new ListNode(-1);
+        dummyNode->next = head;
+        ListNode* start = dummyNode;
+        
+        ListNode* pre, *remaining, *nxt;
+        for(int i=0; i<numberOfGrouptsToReverse; i++){
+            pre = NULL;
+            remaining = head;
+            for(int j=0; j<k; j++){
+                nxt = head->next;
+                head->next = pre;
+                pre=head;
+                head=nxt;
+            }
+            
+            start->next=pre;
+            remaining->next = head;
+            start = remaining;
+        }
+        return dummyNode->next;
+        
     }
 };
