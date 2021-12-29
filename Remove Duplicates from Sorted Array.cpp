@@ -1,5 +1,6 @@
 //success. 사실상 unique함수를 알고 있었기에 망정이지, 구현은 실패함.
 //직접 구현하는 것을 알아보자
+//그리고 for문 안에서 왠만하면 i-- 이지랄좀 하지 말자!
 Runtime: 8 ms, faster than 89.94% of C++ online submissions for Remove Duplicates from Sorted Array.
 Memory Usage: 18.5 MB, less than 8.37% of C++ online submissions for Remove Duplicates from Sorted Array.
   
