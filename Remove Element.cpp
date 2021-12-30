@@ -3,17 +3,29 @@
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
-        int i=0;
-        int n = nums.size();
-        while(i < n){
-            if(nums[i] == val){
-                nums[i] = nums[n-1];
-                n--;
-            }else{
-                i++;
-            }
+       
+        //아래의 코드로 하면 Input이 0일 때 따로 처리를 해주어야 한다.
+        //int s = 0;
+        //int e = nums.size()-1;
+        //while(s < e){
+           //if(nums[s] == val){
+               // nums[s] = nums[e];
+              //  e--;
+          //  }else
+          //      s++;
+       // }
+        
+        //그 대신 e를 nums.size()로 초기화 해주고, nums[s] = nums[e-1]로 하면 해결 된다.
+        int s = 0;
+        int e = nums.size();
+        while(s < e){
+            if(nums[s] == val){
+                nums[s] = nums[e-1];
+                e--;
+            }else
+                s++;
         }
-        return i;
+        return s;
     }
 };
 //erase와 remove를 같이 쓴 경우. 근데 이럴 필요가 없다.
