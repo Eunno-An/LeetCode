@@ -3,6 +3,14 @@ Time: 40분
 Runtime: 7 ms, faster than 19.23% of C++ online submissions for Search in Rotated Sorted Array.
 Memory Usage: 13.1 MB, less than 26.74% of C++ online submissions for Search in Rotated Sorted Array.
   
+ 
+
+/*
+회고
+아래처럼 굳이 복잡하게 풀 필요가 없다.
+더 쉽게 풀 수 있는데 굳이 어렵게 풀 이유가 없ㄱ는데..
+아래 좋은 코드 첨부하였음.
+*/
 #include <iostream>
 #include <string>
 #include <vector>
@@ -53,3 +61,29 @@ public:
         return 123456789;//"OOPS"
     }
 };
+
+int beg=0,end=nums.size()-1,mid;
+        while(beg<=end)
+        {
+            mid=(beg+end)/2;
+            if(nums[mid]==target)
+                return mid;
+            if(nums[beg]<=nums[mid])
+            {
+                if(target<=nums[mid] && target>=nums[beg])
+                    end=mid-1;
+                else
+                    beg=mid+1;
+            }
+            
+            else
+            {
+                if(target>=nums[mid] && target<=nums[end])
+                   beg=mid+1;
+                else
+                    end=mid-1;
+            }
+            
+        }
+        return -1;
+    }
