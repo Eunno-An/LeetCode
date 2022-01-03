@@ -1,3 +1,4 @@
+Success
 Runtime: 4 ms, faster than 80.03% of C++ online submissions for Search Insert Position.
 Memory Usage: 9.8 MB, less than 21.60% of C++ online submissions for Search Insert Position.
   
