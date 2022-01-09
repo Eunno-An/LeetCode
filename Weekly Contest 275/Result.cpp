@@ -97,6 +97,9 @@ public:
 2135. Count Words Obtained After Adding a Letter
 못품. 실수한 부분 체크하기. 이것도 잘못품 어떤 부분을 놓쳤을까?
 /*
+요구사항:
+startWords로부터 conversion을 통해 만들 수 있는 targetWords스트링의 개수를 리턴해라
+
 핵심 아이디어:
 targetWords[i]들을 정렬하고, startWords[i]에 어떤 lower case하나를 넣어서 정렬하는 것을 비교하면 될 것이다.
 
@@ -117,12 +120,8 @@ temp에다가 뭐 하나 추가하고 정렬한 뒤, 단순히 pop_back()을 해
 Runtime: 1332 ms, faster than 57.14% of C++ online submissions for Count Words Obtained After Adding a Letter.
 Memory Usage: 113.5 MB, less than 85.71% of C++ online submissions for Count Words Obtained After Adding a Letter.
 Submit을 할 때마다 결과가 달라진다 ㅋㅋㅋ
-
-다른 사람의 풀이:
-1. Bitmask
-
 */
-class Solution {
+	class Solution {
 public:
     int wordCount(vector<string>& startWords, vector<string>& targetWords) {
         int ret = 0;
@@ -155,5 +154,49 @@ public:
 
         return ret;
 
+    }
+};
+
+다른 사람의 풀이:
+1. Bitmask
+핵심 아이디어:
+starWords에 있는 단어들을 hash로 저장할 것이다. 그리고 hash 방법은 (1 << (s[i] - 'a')) 이런 식으로 할 것이다.
+이렇게 되면 abc나 cba가 같다! 고로 정렬할 필요가 없으므로 코드 효율성이 높아진다. 자세한건 아래 코드 참고하자!
+해쉬를 사용하므로 unordered_set을 사용했다. multiset을 사용할 필요가 없다. 왜냐하면 targetWords에서 하나씩 비교하기 때문이다.
+
+기본 아이디어:
+startWords를 먼저 해싱해놓자.
+그 다음 targetWords에 있는 단어들을 순회하면서, 각 글자에서 하나씩 뺀 다음 key search를 수행한다. 
+만약에 있다면 증가, 아니면 반환.
+	
+class Solution {
+public:
+    int wordCount(vector<string>& startWords, vector<string>& targetWords) {
+        //startWords에 있는 단어들에 대한 해쉬를 생성한다.
+        unordered_set<int> vis;
+        for(string s : startWords){
+            int hash = 0;
+            for(int i=0; i<s.size(); i++)
+                hash += (1 << (s[i]-'a'));
+            vis.insert(hash);
+        }//abc나 cba가 hash키가 같은 이유! 정말 고급스런 코드이다. 이 기술은 잘 알아놓자.
+        
+        //check each target Word
+        int res = 0;
+        for(string s : targetWords){
+            for(int k=0; k<s.size(); k++){//k는 건너뛰는 인덱스.
+                int hash = 0;
+                for(int i=0; i<s.size(); i++){
+                    if(i == k)continue;
+                    hash += (1 << (s[i] - 'a')); // 반드시 쉬프트 연산자를 감싸자.
+                }
+                if(vis.count(hash)){
+                    res++;
+                    break;
+                }
+                
+            }
+        }
+        return res;  
     }
 };
