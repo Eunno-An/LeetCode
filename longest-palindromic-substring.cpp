@@ -1,121 +1,59 @@
 //fail
-// https://leetcode.com/problems/longest-palindromic-substring/
-
-/*
-Solution 1: Brute Force Approach (Give TLE)
-
-Generate all substring and check it is palindrome or not.
-If it is palindrome then check it is longest or not.
-
-Time Complexity - O(N^3),  O(N^2) to generate all substring and O(N) to check it is palindrome or not.
-Space complexity - O(1).
-*/
-
-class Solution
-{
+//2차 복습 : 22 01 14. Fail 
+class Solution {
 public:
-    bool isPalindrome(string s)
-    {
-        int i = 0, j = s.size() - 1;
-
-        while (i < j)
-        {
-            if (s[i++] != s[j--])
-                return false;
-        }
-        return true;
-    }
-
-    string longestPalindrome(string s)
-    {
+    /*
+    문제:
+    s라는 스트링이 주어지면, 가장 긴 팰린드롬 부분문자열을 구하여라.
+    (팰린드롬: 뒤집어도 똑같은 문자열)
+    
+    핵심 아이디어:
+    1)인덱스 i부터 j까지 뽑아서, 그게 팰린드롬인지 확인한다.
+    팰린드롬인지 확인하는것은 i부터 j까지 문자열 요소중에 하나씩 뒤져보면서 확인한다.
+    ->O(10억) = 10초
+    
+    2)DP
+    isPalindrome(s, i, j) 함수를 호출하는 과정에서 너무 중복 탐색이 많이 일어난다.
+    P(i, j) = s[i]...s[j]가 palindrome이라면 참을 리턴한다.
+    점화식 P(i, j) = (P(i+1, j-1) && (S[i] == S[j]))이 성립한다.
+    
+    기저조건
+    1. (i == j) true;
+    2. P(i, i+1) = (S[i] ==  S[i+1])
+    
+    실수한점:
+    DP까지는 생각했으나, 함수를 차분히 생각해야 하는데 막막해서 다가갈 엄두를 내지 못함.
+    그리고 2중 for문 인덱싱 하는거 실수했음.
+    */
+    
+    string longestPalindrome(string s) {
         int n = s.size();
-        if (n == 0)
+        if(n == 0)
             return "";
-
-        if (n == 1)
-            return s;
-
-        string result = "";
-        for (int i = 0; i < n - 1; i++)
-        {
-            for (int j = 1; j <= n - i; j++)
-            {
-                if (isPalindrome(s.substr(i, j)))
-                {
-                    if (result.size() < j)
-                        result = s.substr(i, j);
-                }
-            }
-        }
-        return result;
-    }
-};
-
-/*
-Above Solution Give TLE....
-
-How Can we optimise our code?
-
-Got it in above solution, we do unnecessary recompution while validating palindomes.
-For example : if we know string "aba" is palindrome then "cabac" must be palindrome as left and right are equal.
-
-Solution 2: Using DP
-
-P(i, j) == P(i+1, j-1) && s[i] == s[j];
-
-Base cases :
-
-//One character
-P(i, i) = true;
-
-//Two character
-P(i, i+1) = s[i] == s[i+1];
-
-Time Complexity - O(N^2), Space Complexity - O(N^2) (caching all substring)
-*/
-
-class Solution
-{
-public:
-    string longestPalindrome(string s)
-    {
-        int n = s.size();
-        if (n == 0)
-            return "";
-
-        // dp[i][j] will be 'true' if the string from index i to j is a palindrome.
-        bool dp[n][n];
-
-        //Initialize with false
-
-        memset(dp, 0, sizeof(dp));
-
-        //Every Single character is palindrome
-        for (int i = 0; i < n; i++)
-            dp[i][i] = true;
-
-        string ans = "";
-        ans += s[0];
-
-        for (int i = n - 1; i >= 0; i--)
-        {
-            for (int j = i + 1; j < n; j++)
-            {
-                if (s[i] == s[j])
-                {
-                    //If it is of two character OR if its susbtring is palindrome.
-                    if (j - i == 1 || dp[i + 1][j - 1])
-                    {
-                        //Then it will also a palindrome substring
-                        dp[i][j] = true;
-
-                        //Check for Longest Palindrome substring
-                        if (ans.size() < j - i + 1)
-                            ans = s.substr(i, j - i + 1);
+        
+        bool cache[1001][1001];
+        memset(cache, false, sizeof(cache));
+        for(int i=0; i<n; i++)
+            cache[i][i] = true;
+        
+        for(int i=0; i<n-1; i++)
+            if(s[i] == s[i+1])
+                cache[i][i+1]=true;
+        
+        string ans="";
+        ans += s[0];//Input: "a"인 경우 예외처리
+        for(int i=n-1; i>=0; i--){
+            for(int j=i+1; j<n; j++){
+                if(s[i] == s[j]){
+                    if(j-i == 1 || cache[i+1][j-1]){
+                        cache[i][j] = true;
+                        if(ans.size() < j-i+1)
+                            ans = s.substr(i, j-i+1);
                     }
                 }
             }
         }
-        return ans;
+        
+        return ans;   
     }
 };
