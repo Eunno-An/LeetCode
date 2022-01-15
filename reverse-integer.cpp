@@ -85,6 +85,7 @@ public:
     }
 };
 
+//push와 pop연산을 통해 구현함. 예외처리 반드시 필요함.
 class Solution {
 public:
     int reverse(int x) {
