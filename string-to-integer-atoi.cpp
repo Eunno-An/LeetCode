@@ -1,4 +1,10 @@
 //fail
+//22.01.15 코드 복습 완료. 풀지는 않고 한번 훑기만 함.
+//문제: 조건에 맞게 atoi 함수를 구현하는 것. 
+//해결 방법: 정말 문제에 써 있는대로 구현하면 됨. 영어라 좀 어려움
+//회고: overflow 체크하는 방법. interview에서 long을 쓰지 말고 오버플로우 체크 하라고 하면 이런식으로 해야함.214748364가 INT_MAX/10이고, 결국 INT_MIN은 =-2147483648이니까, digit이 8 이상이면 
+//오버플로우가 난다고 가정해도 되는 것임.
+
 //아래것은 굉장히 깔끔하게 짠 코드 참조함.
 //51~53 참조하기. https://leetcode.com/problems/string-to-integer-atoi/discuss/1402936/JAVA-C%2B%2B-%3A-Simple-or-Easy-or-32-bit-int-or-Faster-than-100-or-Explained
 //실패요인: 영어 해석 실력이 딸림.
