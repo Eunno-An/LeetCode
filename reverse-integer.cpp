@@ -1,6 +1,11 @@
-//위에건 내가 푼 거고
-//아래꺼는 Discussion의 맨 위의 코드를 참조.
-//정말 와...라는 소리밖에 안나온다. ㅋㅋ
+//2022.01.15 두번째 풀이 완료. 시간 13분.
+/*
+문제:
+    x라는 32비트 부호있는 정수가 주어질때, 그 숫자들을 뒤집은 x를 리턴해라.
+    만약 뒤집은 x가 부호있는32비트 정수 표현을 넘어갈 때, 0을 리턴해라.
+    (가정: 64비트 정수가 허용되지 않는 환경이라고 가정한다.)
+*/
+//첫 풀이 코드
 class Solution {
 public:
     //26분 36초.
@@ -33,6 +38,50 @@ public:
         return ret;
             
         
+    }
+};
+class Solution {
+public:
+    /*
+    해결 방법:
+    max_int와 min_int를 지정해주고,
+    string의 reverse함수를 사용한다.
+    여기서 중요한 점. custom 함수가 reverse고, 우리가 원하는 함수인 string::reverse함수가 이름이 같다.
+    string::reverse함수를 사용하기 위해서는 ::reverse라고 써야 한다!!
+    중요하다.
+    
+    실수한 점:
+    1)max_int와 min_int를 할 때, 1<<31은 오버플로우가 발생한다. 1<<31은 -212312...8임. 즉 오버플로우 발생함. 따라서 long형으로 변환시켰음.
+    2)x가 만약 min_int 보다 작은 값일 경우 오버플로우가 발생하게 된다.
+    
+    보완할 점:
+    INT_MAX, INT_MIN을 그냥 지정해줘도 될뻔했다. 이 문제 자체에서의 
+    */
+    int reverse(int x) {
+        //mistake 1)
+        int max_int = ((long)1<<31)-1;
+        int min_int = ((long)1<<31)*-1;
+        
+        bool isMinus = false;
+        if(x < 0){
+            if(x < min_int+1)
+                return 0;
+            x *= -1;//mistake 2)
+            isMinus = true;
+        }
+        string strX = to_string(x);
+        ::reverse(strX.begin(), strX.end());
+        
+        long lX = stol(strX);
+        if(isMinus)
+            lX *= -1;
+        
+        int ret;
+        if(lX > max_int || lX < min_int)
+            ret = 0;
+        else
+            ret = (int)lX;
+        return ret;
     }
 };
 
