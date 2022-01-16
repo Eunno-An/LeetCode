@@ -1,3 +1,25 @@
+
+/*
+Fail
+문제: s와 p가 주어지면, p 정규식으로 s 표현이 가능한지 여부를 물어보는 문제
+
+해결 아이디어:
+
+
+회고:
+1) Regular Expression Matching과 매우 유사하다. 그러나 단 하나의 차이는 
+It is guaranteed for each appearance of the character '*', there will be a previous valid character to match.
+이 문제에서는 위 조건이 명시되어 있지 않다.
+그래도 문제 해석만 잘 하면 어렵지 않다.
+하지만 이 문제에서는 문자열들이 훨씬 길다. 즉, 브루트 포스로는 할 수가 없는 문제이다.
+
+2) DP
+이것도 똑같이 DP로 해결이 가능하다.
+매우 유사하다.
+
+3)Backtracking
+무슨 start로 하는게 있다는데 잘 모르겠다.. 이건 좀 더 이해해야겠다.
+*/
 class Solution {
 public:
     bool isMatch(string s, string p) {
