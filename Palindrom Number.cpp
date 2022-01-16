@@ -1,5 +1,5 @@
 //아래가 더 간결함.
-
+//2차 풀이: 22.01.16. 첫 풀이와 똑같이 풀었음.
 class Solution {//runtime 8ms
 public:
     bool isPalindrome(int x) {
