@@ -9,6 +9,28 @@
 //근데 이럴 필요가 없이 그냥 N번만 돌면 됨.
 //prefix(S1, S2, S3, ..., Sn) = prefix(...prefix(S1, S2), S3), S4), ... , Sn)
 
+//2022-01-20 두번째 풀이. 성공
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string comp = strs[0];
+        
+        for(int i=1; i<strs.size(); i++){
+            string now = strs[i];
+            int lastIdx = 0;
+            for(int j=0; comp.size() > j && j<now.size(); j++){
+                if(comp[j] == now[j])
+                    lastIdx = j+1;
+                
+                else if(comp[j] != now[j])
+                    break;
+            }
+            comp = now.substr(0, lastIdx);
+        }
+        return comp;
+    }
+};
+
 //아래의 방법들 외에도, 이분탐색, Trie 들로 푸는 방법이 있으니 더 참고해보자.
 //https://leetcode.com/problems/longest-common-prefix/solution/
 /*
