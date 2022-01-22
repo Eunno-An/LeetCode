@@ -1,5 +1,16 @@
+
 //13분 40초
+//2차 복습: 7분?대에 끊은듯.
 //단순 구현 문제. 아래에 다른 해법들도 했으니 잘 봐둘것
+/*
+    문제:
+    2-9사이 숫자가 써져있는 문자열이 주어지면, 
+    숫자들이 제공할 수 있는 모든 문자 조합을 리턴해라.
+    순서는 상관없다.
+    
+    해결방법:
+    
+    */
 class Solution {
 public:
     vector<string> letterCombinations(string digits) {
@@ -93,3 +104,44 @@ void helper(string &digits, int i, string &combi){
 		combi.pop_back();              // backtrack
 	}   
 }
+
+
+//2차풀이
+class Solution {
+public:
+    /*
+    문제:
+    2-9사이 숫자가 써져있는 문자열이 주어지면, 
+    숫자들이 제공할 수 있는 모든 문자 조합을 리턴해라.
+    순서는 상관없다.
+    
+    해결방법:
+    
+    */
+    vector<string> ret;
+    map<char, string> phoneNumber;
+    void help(string digits, int idx, string now){
+        if(idx == digits.size()){
+            ret.push_back(now);
+            return;
+        }
+        string phoneStr = phoneNumber[digits[idx]];
+        for(int i=0; i<phoneStr.size(); i++){//실수: i=idx부터 시작하는게 아님!
+            help(digits, idx+1, now + phoneStr[i]);
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        if(digits.empty())
+            return ret;
+        phoneNumber['2']="abc";
+        phoneNumber['3']="def";
+        phoneNumber['4']="ghi";
+        phoneNumber['5']="jkl";
+        phoneNumber['6']="mno";
+        phoneNumber['7']="pqrs";
+        phoneNumber['8']="tuv";
+        phoneNumber['9']="wxyz";
+        help(digits, 0, "");
+        return ret;
+    }
+};
