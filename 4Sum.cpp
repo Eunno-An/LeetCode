@@ -1,4 +1,8 @@
 //fail
+//2차 시도 Fail
+//2차 실패 이유? 단순 조건 문제.. 이 조건 실수 많이하는듯. 정신 차리자.
+//2차 풀이는 3Sum을 확장시켜 4Sum에 대해 해결하였다.
+//아래 2차 풀이 첨부하였음.
 //상당히 많이 배운 문제.
 /*
 2Sum, 3Sum, 4Sum, ... kSum에 대해서도 물어볼 수 있다.
@@ -66,5 +70,65 @@ public:
             }
         }
         return res;
+    }
+};
+
+
+class Solution {
+public:
+    /*
+    문제:
+    n개의 정수로 이루어진 nums가 주어지면,
+    nums[a]+nums[b]+nums[c]+nums[d] == target이 되는
+    
+    모든[nums[a], nums[b], nums[c], nums[d]]의 unique quadruplets를 구하여라.
+    
+    해결방법:
+    "unique" quadruplets라는 것에 유의하자 반드시!
+    
+    유사한문제:
+    3Sum.
+    */
+    
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        vector<vector<int>> ret;
+        
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        for(int i=0; i<n; i++){
+            int a = nums[i];
+            if(i > 0 && nums[i] == nums[i-1]) continue;
+            for(int j=i+1; j<n; j++){
+                int b = nums[j];
+                if(j>i+1&& nums[j] == nums[j-1]) continue;//실수: 조건이 j>1이 아니라 j>i+1; 이여야 한다.. 이 바보
+                int left = j+1;
+                int right = n-1;
+                while(left < right){
+                    int c = nums[left];
+                    int d = nums[right];
+                    
+                    long sum = (long)a + b + c + d;//실수2: 오버플로우 생각 안했다.
+                    if(sum == target){
+                        ret.push_back({a, b, c, d});
+                        while(left<right) {
+                            if(nums[left] == c) left++;
+                            else break;
+                        }
+                        while(left < right){
+                            if(nums[right] == d) right--;
+                            else break;
+                        }
+                    }
+                    else if(sum > target)
+                        right--;
+                    else
+                        left++;
+                    
+                    
+                }
+            }
+        }
+        //-8-1122233335
+        return ret;
     }
 };
