@@ -1,5 +1,5 @@
 /*
-22분 소요
+1차 풀이: 22분 소요
 Runtime: 0 ms, faster than 100.00% of C++ online submissions for Remove Nth Node From End of List.
 Memory Usage: 10.8 MB, less than 31.01% of C++ online submissions for Remove Nth Node From End of List.
 
@@ -11,6 +11,13 @@ Follow-up은 ListNode를 한 번만 순회하라고 하는 것이였음.
 
 Discuss에 더 좋은 풀이가 있어서 아래 추가하였음.
 https://leetcode.com/problems/remove-nth-node-from-end-of-list/discuss/1164542/JS-Python-Java-C%2B%2B-or-Easy-Two-Pointer-Solution-w-Explanation
+*/
+/*
+2차 풀이: 22-01-28
+17분 50초 소요
+Follow-up을 보지 못했음..
+그래서 2번 순회했음.
+One-pass
 */
 
 /**
