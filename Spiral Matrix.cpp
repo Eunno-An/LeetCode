@@ -1,6 +1,5 @@
 Success
-Details 
-Runtime: 3 ms, faster than 25.64% of C++ online submissions for Spiral Matrix.
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Spiral Matrix.
 Memory Usage: 7 MB, less than 29.96% of C++ online submissions for Spiral Matrix.
   
 class Solution {
@@ -24,6 +23,8 @@ public:
     회고:
     두번째 예시에서, loop3를 돌때 현재 위치 7에서 다시 6으로 가는 경우가 발생
     따라서 visit배열을 통해 한번 간 곳을 들를 경우 바로 답을 리턴해주었음.
+    
+    Discussion에 좀 더 가독성이 쉬운 코드 아래에 첨부하였음. 
     */
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
         vector<vector<bool>> visit(matrix.size(), vector<bool>(matrix[0].size(), false));
@@ -95,5 +96,48 @@ public:
             //cout << "m: " << m << " n: " << n << " nowY: " << nowY << " nowX: " << nowX << endl;
         } 
         return ret;
+    }
+};
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int n=matrix.size();
+        int m=matrix[0].size();
+        int left=0,right=m-1,bottom=n-1,top=0;
+        int direction=1;
+        vector<int> v;
+        while(left<=right && top<=bottom)
+        {
+            if(direction==1)
+            {
+                for(int i=left;i<=right;i++) v.push_back(matrix[top][i]);
+                direction=2;
+                top++;
+            }
+            
+            else if(direction==2)
+            {
+                for(int i=top;i<=bottom;i++) v.push_back(matrix[i][right]);
+                direction=3;
+                right--;
+            }
+            
+            else if(direction==3)
+            {
+                for(int i=right;i>=left;i--) v.push_back(matrix[bottom][i]);
+                direction=4;
+                bottom--;
+            }
+            
+            else if(direction==4)
+            {
+                for(int i=bottom;i>=top;i--) v.push_back(matrix[i][left]);
+                direction=1;
+                left++;
+            }
+        }
+        return v;
+        
     }
 };
