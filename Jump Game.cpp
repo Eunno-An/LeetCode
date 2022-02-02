@@ -22,6 +22,9 @@ public:
     ->left = 0, right = 0
     arr[left]를 보면서 현재 최대 갈 수 있는 곳을 수정한다.
     조건 left < right일 때 동안만임. left == right일 경우 stop.
+    
+    회고:
+    카데인 알고리즘과 굉장히 비슷하다.
     */
     bool canJump(vector<int>& nums) {
         if(nums.size() == 1 && nums[0] == 0)
