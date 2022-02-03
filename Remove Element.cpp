@@ -1,5 +1,8 @@
 //fail
 //투포인터에 약하다. 굉장히 쉬운 문젠데 구현도 못하고.. 정말 심각하다~~
+//2차시도 : fail. 
+//이유? e = nums.size() - 1로 해주었고, nums[s] = nums[e]로 했음. 그러니 여러가지 예외처리를 해 줄게 있었음.
+
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
@@ -20,7 +23,7 @@ public:
         int e = nums.size();
         while(s < e){
             if(nums[s] == val){
-                nums[s] = nums[e-1];
+                nums[s] = nums[e-1];//swap으로 해도 상관없다.
                 e--;
             }else
                 s++;
