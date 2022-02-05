@@ -2,6 +2,10 @@ Success
 Time: 40분
 Runtime: 7 ms, faster than 19.23% of C++ online submissions for Search in Rotated Sorted Array.
 Memory Usage: 13.1 MB, less than 26.74% of C++ online submissions for Search in Rotated Sorted Array.
+
+2차시도: Fail
+회고: nums[left]<=nums[mid]가 아니라 nums[left]<=nums[right]라고 하였음. 
+사사로운 if조건.. 이분탐색은 조건이 너무 까다로운 문제같다.
   
  
 
