@@ -1,8 +1,17 @@
 Success
+1차
 Time: 38분
 Runtime: 14 ms, faster than 9.89% of C++ online submissions for Find First and Last Position of Element in Sorted Array.
 Memory Usage: 14 MB, less than 5.56% of C++ online submissions for Find First and Last Position of Element in Sorted Array.
 아래 좋은 코드 첨부했음. 내가 짠거는 너무 꼼수 부려서했음. 로직으로는 별로 좋은 로직이 아님.
+
+2차 2022-02-22
+Time: 18분 30초
+Runtime: 16 ms, faster than 26.03% of C++ online submissions for Find First and Last Position of Element in Sorted Array.
+Memory Usage: 13.8 MB, less than 19.17% of C++ online submissions for Find First and Last Position of Element in Sorted Array 
+
+2차 회고:
+이분탐색 푸는데 아직 유연하지 않은것같음. 코드 보면서 감 익히기. 그래도 깔끔하게 짜긴 짰음.
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
