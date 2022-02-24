@@ -1,3 +1,9 @@
+22-02-24
+Success
+Time:1분미만
+Details 
+Runtime: 3 ms, faster than 61.06% of C++ online submissions for Plus One.
+Memory Usage: 8.8 MB, less than 12.83% of C++ online submissions for Plus One.
 class Solution {
 public:
     vector<int> plusOne(vector<int>& digits) {
