@@ -11,6 +11,9 @@
 //해결 아이디어:
 //1) Brute Force
 //어떤 기준점 i로부터 왼쪽과 오른쪽을 순회하면서, 각각의 maxLeft와 maxRight중 구한다음, min(maxLeft, maxRight)-height[i]를 한다. 이게 i번째 칸에 쌓일 수 있는 물의 높이이다.
+
+//2차 FAIL
+//아얘 접근조차 못했음.
 class Solution {
 public:
     int trap(vector<int>& height) {
