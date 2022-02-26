@@ -16,6 +16,17 @@ Fail.
 만약 우리가 이러한 인덱스를 찾지 못하면, n까지의 자연수는 모두 존재하므로 n + 1을 반환한다.
 https://leetcode.com/problems/first-missing-positive/discuss/781724/C%2B%2B-simple-5-line-solution-O(n)-time-and-O(1)-space
 
+2차 Fail
+2022-02-26
+부연설명
+
+우린 단순히 1, 2, 3 이런 작은 수들부터 있냐만 보면 된다.
+그렇다면 배열들을 보면서 1이란 숫자가 나오면 arr[1-1]번째를 음수화 시켜주면 되고,
+2란 숫자가 나오면 arr[2-1]번째를 음수화 시켜주면된다.
+...
+k란 숫자가 나오면 arr[k-1]번째를 음수화 시켜주면 된다.
+그 후에 배열을 순회하면서 arr[i]가 0보다 크면? i+1이란 숫자는 아직 안나왔다는 말이 된다.
+
 */
 class Solution {
 public:
