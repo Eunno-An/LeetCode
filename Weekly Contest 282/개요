@@ -1,0 +1,77 @@
+2번 28분 25초
+왜 unordered_map으로 하는게 더 시간이 빨랐을까
+그리고 set과 multiset에서 iterator로 erase하면 다 지워지는거 인지하고 있어야함. 잘 알고 있는지도 체크하기
+class Solution {
+public:
+    int minSteps(string s, string t) {
+        unordered_map<char, int> ms, mt;
+        for(int i=0; i<s.size(); i++){
+            ms[s[i]]++;
+        }
+        for(int i=0; i<t.size(); i++){
+            mt[t[i]]++;
+        }
+        
+        for(int i=0; i<t.size(); i++){
+            if(ms.find(t[i]) != ms.end() && ms[t[i]]>0)
+                ms[t[i]]--;
+        }
+        for(int i=0; i<s.size(); i++){
+            if(mt.find(s[i]) != mt.end() && mt[s[i]]>0)
+                mt[s[i]]--;
+        }
+        int ret=0;
+        for(auto it : ms){
+            ret += it.second;
+        }
+        for(auto it : mt){
+            ret += it.second;
+        }
+        return ret;
+    }
+};
+
+//3번 좀 어렵다. 이거 잘못된 풀이임. 시뮬레이션인데 도통 어떻게 줄여야 할지를 모르겠음.
+class Solution {
+public:
+    /*
+    문제:
+    time 배열이 주어지는데, time[i]는 i번째 버스가 한번의 여행을 완료하는데 걸리는 시간을 의미한다.
+    각각의 버스는 multiple trip들을 성공적으로 수행한다. 
+    그 말은 다음 여행은 현재 여행이 완료된 뒤에 바아아로 시작할 수 있는 의미이다.
+    또한 각각의 버스는 독립적으로 동작한다.
+
+    또한 나는 totalTrips라는 정수를 부여받는데, 모든 버스가 반드시 해야만 하는 총 trip의 개수를 의미한다 .
+    적어도 totalTrips 만큼의 trip을 하기위한 bus들의 최소 시간을 찾아라.
+    
+    제한:
+    time의 길이는 십만 이하
+    time[i]와 totalTrips의 크기는 천만 이하.
+    
+    해결방법:
+    일단 정렬.
+    
+    */
+    long long minimumTime(vector<int>& time, int totalTrips) {
+        sort(time.begin(), time.end());
+        vector<int> temp = time;
+        long long totalTime=0;
+        for(int i=1; ; i++){
+            for(int j=0; j<time.size(); j++){
+                time[j]--;
+                if(time[j] == 0){
+                    time[j] = temp[j];
+                    totalTime++;
+                    if(totalTime >= totalTrips){
+                        return i;
+                    }
+                }
+            }
+        }
+        return -1;
+        
+    }
+};
+
+
+
