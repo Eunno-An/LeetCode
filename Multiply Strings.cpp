@@ -1,3 +1,5 @@
+1차 Fail
+2차 2022-02-28 Success. Time= 24:14
 /*
 Fail
 문제:
@@ -73,5 +75,60 @@ public:
         }
         reverse(answer.begin(), answer.end());
         return answer;
+    }
+};
+
+//2차 코드
+class Solution {
+public:
+    /*
+    문제:
+    num1과 num2가 음이 아닌 정수인데, string으로 주어진다.
+    그렇다면 둘의 곱 결과를 string 형태로 리턴해라.
+    
+    제한:
+    
+    해결방법:
+    단순 곱이다. upper를 생각해주고 계속 진행하면 된다.
+    그런데 뒤에서 부터 곱해야 하니... 뒤집고 곱해주는게 어떨까.
+    
+    실수:
+    0은 다 없어질 수 있으니, 만약 ret가 비어있으면 ? 0을리턴해준다.
+    그리고 num2의 반복문이 끝나고 upper가 남아있는 경우가 있는데
+    이는 ret[i+num2.size()-1]에다가 더해주는게 아니라, ret[i+num2.size()]에다가 더해주어야 한다.
+    */
+    string multiply(string num1, string num2) {
+        string ret(num1.size() + num2.size(), '0'); // 999*99는 다섯자리.
+        reverse(num1.begin(), num1.end());
+        reverse(num2.begin(), num2.end());
+        
+        int upper=0;
+        for(int i=0; i<num1.size(); i++){
+            int a = num1[i] - '0';
+            //cout << a << endl;
+            for(int j=0; j<num2.size(); j++){
+                int b = num2[j] - '0';
+                //cout << b << endl;
+                int add = (upper + a * b) % 10;
+                upper = (upper + a * b) / 10;
+                
+                int pos = ret[i+j]-'0' + add;
+                if(pos >= 10){
+                    pos -= 10;
+                    upper += 1;
+                }
+                ret[i+j] = pos + '0';
+            }
+            if(upper != 0){
+                ret[i+num2.size()] = (ret[i+num2.size()]-'0' + upper) + '0'; 
+            }
+            upper = 0;
+        }
+        while(ret.back() == '0')
+            ret.pop_back();
+        reverse(ret.begin(), ret.end());
+        
+        return ret.empty() ? "0" : ret;
+        
     }
 };
