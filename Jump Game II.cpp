@@ -1,4 +1,5 @@
 //Success. 시간 25분?30분? 정확히 못쟀음..
+//2차 22-03-01: Fail. DP도 제대로 못짰음. 집중 안하고 하면 진짜 안될듯
 /*
 
 Runtime: 1236 ms, faster than 5.01% of C++ online submissions for Jump Game II.
