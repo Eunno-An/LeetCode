@@ -1,4 +1,6 @@
+1차 22-03-02
 Success
+Time:17M 36S
 Details 
 Runtime: 15 ms, faster than 6.09% of C++ online submissions for Search a 2D Matrix.
 Memory Usage: 9.4 MB, less than 78.63% of C++ online submissions for Search a 2D Matrix.
