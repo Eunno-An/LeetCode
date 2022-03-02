@@ -2,6 +2,8 @@ class Solution {
 public:
     /*
     Success 35분
+    
+    
 Details 
 Runtime: 58 ms, faster than 34.96% of C++ online submissions for Group Anagrams.
 Memory Usage: 21.7 MB, less than 22.64% of C++ online submissions for Group Anagrams.
@@ -18,7 +20,15 @@ Memory Usage: 21.7 MB, less than 22.64% of C++ online submissions for Group Anag
     
     회고:
     unordered_map은 key로 pair값을 사용하지 못한다!!!!!!!!!!
+    
+    
+    2차 22-03-02: Success. 6분. 
+    Success
+Details 
+Runtime: 63 ms, faster than 40.81% of C++ online submissions for Group Anagrams.
+Memory Usage: 21.7 MB, less than 22.27% of C++ online submissions for Group Anagrams.
     */
+    //1차 코드
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
         unordered_map<string, vector<string>> hash;
         vector<vector<string>> ret;
@@ -36,6 +46,25 @@ Memory Usage: 21.7 MB, less than 22.64% of C++ online submissions for Group Anag
         
         for(auto it : hash)
             ret.push_back(it.second);
+        return ret;
+    }
+    //2차 코드
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string, vector<string>> bucket;
+        for(int i=0; i<strs.size(); i++){
+            string temp = strs[i];
+            sort(temp.begin(), temp.end());
+            //cout << temp << endl;
+            if(bucket.find(temp) == bucket.end()){
+                vector<string> anagram = {strs[i]};
+                bucket.insert(make_pair(temp, anagram));
+            }else
+                bucket[temp].push_back(strs[i]);
+        }
+        vector<vector<string>> ret;
+        for(auto it : bucket)
+            ret.push_back(it.second);
+        
         return ret;
     }
 };
