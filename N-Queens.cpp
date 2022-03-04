@@ -1,4 +1,6 @@
 //Success 23:25분
+//2차: 03-04 Fail. 집중해서 풀지 않았음. 코드 첨부함.
+//2차는 int형을 통해 재귀 부담을 줄이고, main에서 한번에 처리했음.
 class Solution {
 public:
     /*
@@ -52,6 +54,59 @@ public:
     vector<vector<string>> solveNQueens(int n) {
         vector<string> board(n, string(n, '.'));
         help(0, board);
+        return ret;
+    }
+};
+
+
+//2차코드 첨부
+class Solution {
+public:
+    /*
+    문제:
+    N-queens문제.
+    
+    제한:
+    
+    해결방법:
+    
+    */
+    vector<vector<int>> ret_int;
+    void getQueensPos(int n, vector<int> now, int idx){//idx = 현재 몇번째 열인지
+        if(n == idx){
+            ret_int.push_back(now);
+            return;
+        }
+        
+        for(int i=0; i<n; i++){//0번째 행부터 n-1번째 행까지 한번씩 다 놓아볼꺼얌
+            bool able = true;
+            for(int j=0; j<idx; j++){//현재 idx열에 위치해있으니까 우리는 0번부터 idx-1번째 위치에 있는 말들과 idx번에 있는 말의 상관관계를 볼꺼야.
+                if(now[j] == i) {able = false; break;};
+                if(i - (idx-j) == now[j]) {able = false; break;};//now[j]가 idx번쨰 열의 i행에 위치한 말보다 왼쪽 위 대각선에 있는 경우
+                if(i + (idx-j) == now[j]) {able = false; break;};
+            }
+            if(able){
+                now.push_back(i);
+                getQueensPos(n, now, idx+1);
+                now.pop_back();
+            }
+            
+        }
+        return;
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        
+        getQueensPos(n, vector<int>(), 0);
+        vector<vector<string>> ret;
+        string base(n, '.');
+        for(int i=0; i<ret_int.size(); i++){
+            
+            vector<string> temp(n, base);
+            for(int j=0; j<ret_int[i].size(); j++){
+                temp[ret_int[i][j]][j] = 'Q';
+            }
+            ret.push_back(temp);
+        }
         return ret;
     }
 };
