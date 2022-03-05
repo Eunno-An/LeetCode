@@ -1,8 +1,15 @@
+1차 Fail
+오랜만에 구현하니까 실력이 줄은게 느껴짐. 맨날 공부해야 하는구나 이래서 ..
+2차 Success 22-03-05
+Success
+Time: 6분 30초
+Details 
+Runtime: 8 ms, faster than 54.77% of C++ online submissions for N-Queens II.
+Memory Usage: 7.4 MB, less than 28.04% of C++ online submissions for N-Queens II.
 class Solution {
 public:
     /*
-    Fail.
-    오랜만에 구현하니까 실력이 줄은게 느껴짐. 맨날 공부해야 하는구나 이래서 ..
+    
     
     2022-01-31
     문제:
@@ -53,6 +60,41 @@ public:
         vector<string> board(n, string(n, '.'));
         
         help(n, 0, board);
+        return ret;
+    }
+};
+//2차 풀이
+class Solution {
+public:
+    /*
+    문제:
+    가능한 n-queens 가짓수를 구하여라.
+    제한:
+    
+    해결방법:
+    
+    */
+    int ret =0 ;
+    void help(vector<int> positions, int nowIdx, int n){
+        if(nowIdx == n){
+            ret++;
+            return;
+        }
+        for(int i=0; i<n; i++){//0번부터 n-1행까지 보겠다.
+            bool able = true;
+            for(int j=0; j<nowIdx; j++)
+                if(i == positions[j] || i == positions[j] - (nowIdx-j) || i == positions[j] + (nowIdx - j)) {able= false; break;}
+            
+            if(able){
+                positions.push_back(i);
+                help(positions, nowIdx+1, n);
+                positions.pop_back();
+            }
+                
+        }
+    }
+    int totalNQueens(int n) {
+        help(vector<int>(), 0, n);
         return ret;
     }
 };
