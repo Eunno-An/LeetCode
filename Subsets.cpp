@@ -1,5 +1,6 @@
 Success
-Time: 2022-03-05
+1차 2022-03-05
+Time: 5분
 Details 
 Runtime: 4 ms, faster than 54.23% of C++ online submissions for Subsets.
 Memory Usage: 16.1 MB, less than 14.57% of C++ online submissions for Subsets.
