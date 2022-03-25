@@ -1,6 +1,14 @@
+1차
 Success
 Runtime: 0 ms, faster than 100.00% of C++ online submissions for Spiral Matrix.
 Memory Usage: 7 MB, less than 29.96% of C++ online submissions for Spiral Matrix.
+ 
+2차 2022-03-25
+Success
+Runtime: 7 ms, faster than 9.88% of C++ online submissions for Spiral Matrix.
+Memory Usage: 7 MB, less than 31.30% of C++ online submissions for Spiral Matrix.
+회고:
+ret에 값을 넣으면서, 상하좌우 탐색시 ret의 사이즈를 비교하였음.
   
 class Solution {
 public:
