@@ -1,6 +1,7 @@
-class Solution {
-public:
-    /*
+1차 Fail
+2차 Fail 2022-03-25. 
+    
+/*
     Fail. 
 
     2022-01-31
@@ -24,7 +25,12 @@ public:
     N^2 솔루션 까지는 생각했음.
     Kadane 알고리즘 정말 유용할 것 같다. 잘 기억해 두자.
     
-    */
+    2차회고:
+    양수일때만 생각해줌. 음수일때도 생각해주기. 종만북에는 양수일 때만 가능한 코드가 있음.
+*/
+class Solution {
+public:
+    
     int maxSubArray(vector<int>& nums) {
         int MAX = INT_MIN;
         int sum = 0;
