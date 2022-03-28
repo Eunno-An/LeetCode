@@ -1,9 +1,13 @@
-Success
+1차 Success
 시간: 19분 42초
 Details 
 Runtime: 96 ms, faster than 7.34% of C++ online submissions for Merge Intervals.
 Memory Usage: 18.9 MB, less than 45.28% of C++ online submissions for Merge Intervals.
-
+2차 Success
+시간: 11분 06초
+Runtime: 127 ms, faster than 9.37% of C++ online submissions for Merge Intervals.
+Memory Usage: 21.6 MB, less than 10.20% of C++ online submissions for Merge Intervals.
+    2차풀이는 2번 풀이와 비슷하게 풀었다.
 class Solution {
 public:
     /*
