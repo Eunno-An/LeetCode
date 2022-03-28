@@ -1,7 +1,14 @@
+1차
 Success
 시간: 16분 7초
 Runtime: 48 ms, faster than 97.82% of C++ online submissions for Jump Game.
 Memory Usage: 48.3 MB, less than 52.62% of C++ online submissions for Jump Game.
+
+2차 22-03-28
+Fail 
+이유?
+    1. 해결방법을 recursive dp로 하려 했으나, O(n^2)이 걸림. 왜냐하면 일단 함수 호출을 해버림. 
+    2. 반드시 DP가 답은 아니라는 것을 알아야함. 
 class Solution {
 public:
     /*
