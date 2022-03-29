@@ -1,3 +1,4 @@
+1차 Fail
 /*
 Fail
 문제:
@@ -15,6 +16,8 @@ Fail
     해결방법:
     단순한 구현.. 근데 이사람 진짜 개 깔끔하게 했네
 */
+2차 Fail
+이유: 구현 못함.
 class Solution {
 public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) 
