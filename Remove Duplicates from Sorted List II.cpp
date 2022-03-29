@@ -29,10 +29,13 @@ public:
     해결방법:
     unordered_map<int, int> 로 값들을 저장한다.
     pprev, prev, head 세개의 포인터를 사용한다. 왜냐하면 2 3 3 같은 경우 처음 3을 보면 두번째 3이 중복인지 모르기 때문에 2를 가르키는 무언가가 있어야 한다. 그게 pprev이다.
+    
+    
     회고
     - 1차
       ->list가 null일때, 하나만 있을 때에 대한 예외처리를 생각 안해주었음.
       ->그리고 반드시 next는 지정해주어야 한다. pprev에 대한 next를 지정해주지않으면 값이 뜨는게 없음. 얘도 애초에 포인터니까 일일히 next를 가르켜주어야 함.
+      ->좋은 풀이 밑에 첨부하였음. 그리고 이런 유형을 Sentinel Head + Predecessor라고 한다.
 */
     ListNode* deleteDuplicates(ListNode* head) {
         if(head == NULL)
