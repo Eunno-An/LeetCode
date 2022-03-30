@@ -4,7 +4,13 @@ Success
 Details 
 Runtime: 0 ms, faster than 100.00% of C++ online submissions for Spiral Matrix II.
 Memory Usage: 6.7 MB, less than 16.68% of C++ online submissions for Spiral Matrix II.
-  
+
+2022-03-30
+Success
+소요시간 13분
+Details 
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Spiral Matrix II.
+Memory Usage: 6.6 MB, less than 17.68% of C++ online submissions for Spiral Matrix II.
 class Solution {
 public:
     /*
