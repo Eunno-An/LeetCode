@@ -52,3 +52,24 @@ public:
         return getUniquePathNumber(0, 0, m, n);  
     }
 };
+//2차 코드.
+vector<vector<int>> matrix;
+    int cache[101][101];
+    int dfs(int m, int n, int y, int x){
+        if(y == m-1 && x == n-1)
+            return 1;
+        int& ret = cache[y][x];
+        if(ret != 0)
+            return ret;
+        if(y + 1 < m)
+            ret += dfs(m, n, y+1, x);
+        if(x + 1 < n)
+            ret += dfs(m, n, y, x+1);
+        return ret;
+    }
+        
+    int uniquePaths(int m, int n) {
+        matrix.resize(m, vector<int>(n, 0));
+        int ret = dfs(m, n, 0, 0);
+        return ret;
+    }
