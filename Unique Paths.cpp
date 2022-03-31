@@ -4,6 +4,13 @@ Success
 Details 
 Runtime: 0 ms, faster than 100.00% of C++ online submissions for Unique Paths.
 Memory Usage: 6 MB, less than 57.30% of C++ online submissions for Unique Paths.
+    
+2차 2022-03-31
+Time:10분
+Success
+Details 
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Unique Paths.
+Memory Usage: 6.6 MB, less than 25.41% of C++ online submissions for Unique Paths.
 class Solution {
 public:
     /*
