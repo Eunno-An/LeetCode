@@ -4,6 +4,11 @@ Success
 Details 
 Runtime: 3 ms, faster than 97.04% of C++ online submissions for Rotate List.
 Memory Usage: 11.7 MB, less than 88.78% of C++ online submissions for Rotate List.
+2차
+Time: 17분 
+Success
+Runtime: 8 ms, faster than 72.35% of C++ online submissions for Rotate List.
+Memory Usage: 11.7 MB, less than 56.52% of C++ online submissions for Rotate List.
 /**
  * Definition for singly-linked list.
  * struct ListNode {
