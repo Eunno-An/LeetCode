@@ -9,6 +9,10 @@ Memory Usage: 7.5 MB, less than 87.05% of C++ online submissions for Unique Path
       시작점이 장애물일때
       끝점이 장애물일때
     2)Bottom-up 풀이방법 첨부함.
+2차 22-04-03
+Sucess
+Time: 5분
+회고: 똑같은 예외에 걸렸음.
 class Solution {
 public:
     /*
