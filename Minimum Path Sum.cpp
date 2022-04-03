@@ -5,6 +5,10 @@ Runtime: 8 ms, faster than 89.32% of C++ online submissions for Minimum Path Sum
 Memory Usage: 9.8 MB, less than 59.96% of C++ online submissions for Minimum Path Sum.
 회고:
 memset으로 최댓값 초기화는 지양!!!!!!!!!!!!!!!!! memset은 0이나 1만 가능하다구...
+2차 Success. 22-04-03
+Time: 07:00
+Runtime: 19 ms, faster than 21.25% of C++ online submissions for Minimum Path Sum.
+Memory Usage: 9.8 MB, less than 64.16% of C++ online submissions for Minimum Path Sum.
 class Solution {
 public:
     /*
