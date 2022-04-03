@@ -19,8 +19,12 @@ public:
     
     한계: 226같은 경우 2, 26과 22, 6에서 발생되는 2, 2, 6중복을 제거하지 못함.
     생각해주다가 시간부족해서 못풀음.
+    
+    또한 DP로 풀어야함.
     */
     
+    
+    //이건 재귀 풀이. 시간초과남
     int numDecodings(string s) {
         return s.empty() ? 0 : numDecodings(0, s);
     }
@@ -32,4 +36,26 @@ public:
         if(p < n-1 && (s[p] == '1' || (s[p] == '2' && s[p+1] < '7'))) res += numDecodings(p+2, s);
         return res;
     }
+    
+    //재귀를 DP로 바꿈.
+     int cache[101];
+    int numDecodings(string s) {
+        memset(cache, -1 ,sizeof(cache));
+        cache[s.size()]=1;
+        return s.empty() ? 0: numDecodings(0,s);    
+    }
+    int numDecodings(int p, string& s) {
+        int n = s.size();
+        if(p == n) return 1;
+        if(s[p] == '0') return 0; // sub string starting with 0 is not a valid encoding
+        int& ret = cache[p];
+        if(ret != -1)
+            return ret;
+        
+        ret = numDecodings(p+1,s);
+        if( p < n-1 && (s[p]=='1'|| (s[p]=='2'&& s[p+1]<'7'))) ret += numDecodings(p+2,s);
+        return ret;
+    }
+    
+    
 };
