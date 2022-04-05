@@ -3,6 +3,10 @@ Details
 Runtime: 3 ms, faster than 73.74% of C++ online submissions for Add Binary.
 Memory Usage: 6.3 MB, less than 84.64% of C++ online submissions for Add Binary.
  
+2차 22-04-05
+Success
+회고:
+순회를 for문 안에서 i<a.size() || i<b.size()로 하게 했는데.. ||가 아니라 &&여야 한다. 그래서...아오/...
  /*
  문제:
  a랑 b를 이진수로 더하는것임.
