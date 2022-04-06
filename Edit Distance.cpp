@@ -1,5 +1,9 @@
 1차 Fail. 2022-02-28
-
+2차 Fail. 2022-04-06. 아이디어를 아얘 생각 못함.
+//word1 = "ab", word2 = "ba"라고 생각하면
+    //insert과정은 "ab"앞에다가 b를 넣었다고 생각하면? word1=  "bab", word2 = "ba". 그럼 일단 word1은 그대로 두고 word2의 다음 글자부터 보면 되겠지?
+    //그리고 p1, p2 포인터 개념 상당히 중요하다. dp를 쓸때 사용할 수 있음과 동시에 insertion의 필요수를 바로 리턴할 수 있다.
+    //base case를 생각해주는게 조금은 어렵다.
 class Solution {
 public:
     /*
