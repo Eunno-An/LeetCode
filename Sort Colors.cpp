@@ -1,8 +1,13 @@
-2022-03-04
+1차 2022-03-04
 
 Runtime: 9 ms, faster than 5.54% of C++ online submissions for Sort Colors.
 Memory Usage: 8.3 MB, less than 70.58% of C++ online submissions for Sort Colors. 
-/*
+2차 2022-04-08
+Success. 풀이는 선택정렬.
+Time: 17분..
+Runtime: 3 ms, faster than 58.37% of C++ online submissions for Sort Colors.
+Memory Usage: 8.3 MB, less than 24.35% of C++ online submissions for Sort Colors.
+    /*
 문제: 정렬을 sort를 쓰지 말고 in-place알고리즘으로 정렬 직접 구현해봐라.
 
 회고:
@@ -16,7 +21,7 @@ low, mid, high pointer를 이용한다.
 만약 
 nums[mid]가 1인 경우: mid++
 nums[mid]가 2인 경우: swap(nums[mid], nums[high]), high--;
-nums[mid]가 1인 경우: swap(nums[mid], nums[low]), low++, mid++;
+nums[mid]가 0인 경우: swap(nums[mid], nums[low]), low++, mid++;
 
 The algorithm ensures that at any point, every element before low is 0, every element after high is 2, every element in between are either 0, 1 or 2 i.e. unprocessed.
 */
