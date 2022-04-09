@@ -5,6 +5,12 @@ Details
 Runtime: 4 ms, faster than 54.23% of C++ online submissions for Subsets.
 Memory Usage: 16.1 MB, less than 14.57% of C++ online submissions for Subsets.
 
+2차 22-04-09
+Time: 1분
+Success
+Details 
+Runtime: 5 ms, faster than 30.21% of C++ online submissions for Subsets.
+Memory Usage: 7.1 MB, less than 84.00% of C++ online submissions for Subsets.
 class Solution {
 public:
     /*
