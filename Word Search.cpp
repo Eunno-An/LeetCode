@@ -3,6 +3,13 @@
 Details 
 Runtime: 750 ms, faster than 33.16% of C++ online submissions for Word Search.
 Memory Usage: 8 MB, less than 36.36% of C++ online submissions for Word Search.
+    
+2차시도: Success
+Time: 12분 6초
+Details 
+Runtime: 350 ms, faster than 71.12% of C++ online submissions for Word Search.
+Memory Usage: 8 MB, less than 75.03% of C++ online submissions for Word Search.
+board값을 ' '으로 바꿔준 후, 다시 되돌리지 않으면 wrong answer가 뜬다.
 class Solution {
 public:
     /*
@@ -80,6 +87,46 @@ public:
                 if(help(board, visit, i, j, word))
                     return true;
             
+        return false;
+    }
+    
+    
+    //2차코드 첨부
+    const int dy[4] = {1, 0, -1, 0};
+    const int dx[4] = {0, 1, 0, -1};
+    int ok(int m, int n, int y, int x){
+        return (y>=0 && y < m && x>=0 && x < n) ? true : false;
+    }
+    bool help(vector<vector<char>>& board, string word, int m, int n, int y, int x){
+        if(word.empty())
+            return true;
+        
+        bool ret = false;
+        char temp = board[y][x];
+        board[y][x] = ' ';
+        for(int i=0; i<4; i++){
+            int ny = dy[i] + y;
+            int nx = dx[i] + x;
+            if(ok(m, n, ny, nx) && board[ny][nx] == word[0]){
+                ret = help(board, word.substr(1), m, n, ny, nx);
+                if(ret)
+                    return true;
+            }
+            
+        }
+        board[y][x] = temp;
+        return false;
+    }
+    bool exist(vector<vector<char>>& board, string word) {
+        int m = board.size();
+        int n = board[0].size();
+        for(int i=0; i<m; i++)
+            for(int j=0; j<n; j++)
+                if(board[i][j] == word[0] && help(board, word.substr(1), m, n, i, j))
+                    return true;
+                
+            
+        
         return false;
     }
 };
