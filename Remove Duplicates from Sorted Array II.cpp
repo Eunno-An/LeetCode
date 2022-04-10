@@ -1,4 +1,7 @@
 1차 Fail 22-03-28
+2차 Fail 22-04-10
+회고
+풀이에 다시 한번 놀람.. ㅋ
 class Solution {
 public:
     /*
