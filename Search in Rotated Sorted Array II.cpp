@@ -1,5 +1,8 @@
 1차 Fail
-
+2차 22-04-12 Fail
+회고
+-> nums[mid]와 target을 비교하지 말고, nums[left]또는 nums[right]와 nums[mid]를 비교 해야한다.
+    
 class Solution {
 public:
     /*
