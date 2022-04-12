@@ -4,6 +4,22 @@ Details
 소요시간:35분
 Runtime: 12 ms, faster than 46.03% of C++ online submissions for Remove Duplicates from Sorted List II.
 Memory Usage: 11.7 MB, less than 10.30% of C++ online submissions for Remove Duplicates from Sorted List II.
+    
+2차 22-04-12
+Success
+Details 
+소요시간:40
+Runtime: 11 ms, faster than 54.32% of C++ online submissions for Remove Duplicates from Sorted List II.
+Memory Usage: 11 MB, less than 99.61% of C++ online submissions for Remove Duplicates from Sorted List II.
+회고:
+아래 코드 첨부. 훨씬 간결하게 코드 짬. 하지만 생각치 못한 예외가 있었음. 0 1 1 같은것임. 바로 뒤에 중복이 걸리는 경운데 이는 
+if(dup){
+                head=head->next;
+                if(head == NULL)
+                    prev->next = NULL;
+                continue;
+            }
+head 가 NULL일 때 prev의 next를 NULL에 연결해 주는 것으로 해결하였음.
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -85,5 +101,45 @@ public:
             
         }
         return ret->next;
+    }
+};
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        
+        
+        ListNode* dummy = new ListNode(-1);
+        ListNode* prev = dummy;
+        dummy->next = head;
+        while(head!=NULL){
+            bool dup = false;
+            while(head->next != NULL and head->val == head->next->val){
+                dup=true;//중복 발생! 얘는 아얘 없애줄꺼니까 나중에 한번 더 next시켜야 함.
+                head=head->next;
+            }    
+            if(dup){
+                head=head->next;
+                if(head == NULL)
+                    prev->next = NULL;
+                continue;
+            }
+            prev->next=head;
+            prev=head;
+            head=head->next;
+            //cout << head->val << endl;
+        }
+        
+        return dummy->next;
     }
 };
