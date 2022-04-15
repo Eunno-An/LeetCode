@@ -3,6 +3,14 @@ Details
 풀이 시간:17분 30초
 Runtime: 25 ms, faster than 10.26% of C++ online submissions for Remove Duplicates from Sorted List.
 Memory Usage: 11.6 MB, less than 35.88% of C++ online submissions for Remove Duplicates from Sorted List.
+	
+2차 22-04-15 
+Success
+Time: 07분
+Details 
+Runtime: 18 ms, faster than 32.23% of C++ online submissions for Remove Duplicates from Sorted List.
+Memory Usage: 11.5 MB, less than 79.48% of C++ online submissions for Remove Duplicates from Sorted List.
+회고: 코드 깔끔해짐. 더 잘짬.
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -60,4 +68,26 @@ public:
 
 	return head;
 }
+};
+
+//2차 코드
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head == NULL)
+            return NULL;
+        
+        ListNode* dummyNode = new ListNode(-1);
+        dummyNode->next = head;
+        ListNode* prev = dummyNode;
+        while(head != NULL){
+            while(head->next != NULL && head->val == head->next->val)
+                head = head->next;
+            //head->next가 null 또는 head->val이 head->next->val과 같지 않은 경우
+            prev->next = head;
+            prev = head;
+            head=head->next;
+        }
+        return dummyNode->next;
+    }
 };
