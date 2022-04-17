@@ -8,6 +8,7 @@
  -> [3, 2, 7, 4]에서 4가 들어왔을 때, 2, 7이 stack에 있고 우리는 7까지만 뺀다!(while조건때문에!)
    예시를 통해서 확실히 이해했다. 거의 다 풀이에 근접했었는데.. 아쉽다
    while문의 등호도 자세히 봐야한다.
+ -> width = st.empty() ? i : i-st.top()-1 이거는 st가 empty()일 경우, st.top()은 null point exception이 나므로 예외처리 해준것이다. 그렇게 어렵게 생각하지 말자.
 class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
