@@ -1,5 +1,13 @@
 1차 22-04-03 Fail
 조합 다루는 재귀를 잘 못하는것같다.
+2차 22-04-19 Success
+Success
+Time: 10분 54초
+Details 
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Decode Ways.
+Memory Usage: 8.1 MB, less than 8.96% of C++ online submissions for Decode Ways.
+회고:
+풀이 더 깔끔하게 하였음. 코드 첨부
 class Solution {
 public:
     /*
@@ -58,4 +66,30 @@ public:
     }
     
     
+};
+
+//2차 풀이
+class Solution {
+public:
+    map<string, int> cache;
+    int help(string s){
+        if(s.empty())
+            return 1;
+        if(s.size() == 1)
+            return s == "0" ? 0 : 1;
+        if(s[0] == '0')
+            return 0;
+        if(cache.find(s) != cache.end())
+            return cache[s];
+        int& ret = cache[s];
+        
+        ret += help(s.substr(1));
+        int num = stoi(s.substr(0, 2));
+        if(10<=num && num<=26)
+            ret += help(s.substr(2));
+        return ret;
+    }
+    int numDecodings(string s) {
+        return help(s);
+    }
 };
