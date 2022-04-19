@@ -1,5 +1,6 @@
 1차 22-04-02 Fail
-
+2차 22-04-19 Fail
+회고: 비슷하게 생각했으나.. 구현 제대로 못함.
 class Solution {
 public:
     /*
