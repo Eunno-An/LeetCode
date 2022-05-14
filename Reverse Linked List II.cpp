@@ -1,5 +1,7 @@
 1차 22-04-03 Fail
-
+2차 22-05-14 Fail.
+2차 회고: Exchange 써서 해결하는 코드 보면 쉬워보이는데
+Exchange에 대한 관련 문서가 없다. cplusplus에서도 안보인다.. 이해하다가 포기함.
 /**
  * Definition for singly-linked list.
  * struct ListNode {
