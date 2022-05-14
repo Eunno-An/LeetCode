@@ -2,6 +2,7 @@
 회고
 코로나 걸리고 오랜만에 풀어서 그런지 .. 어려웠음
 recursion을 통한 재귀 풀이로 해야 할듯.
+풀이 참고: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/discuss/900051/Fully-explained-all-buy-and-sell-problems-C%2B%2B-oror-Recursive-oror-Memoization-oror-Minor-difference
 class Solution {
 public:
     /*
