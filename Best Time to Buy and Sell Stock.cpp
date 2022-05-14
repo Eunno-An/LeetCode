@@ -6,6 +6,12 @@ Runtime: 207 ms, faster than 22.75% of C++ online submissions for Best Time to B
 Memory Usage: 94.9 MB, less than 8.14% of C++ online submissions for Best Time to Buy and Sell Stock.
 회고:
 은근 쉬우면서도 어렵다... Discussion에서 깔끔한 코드 첨부했다.
+  
+2022-05-14 내용 추가
+Recursion풀이 추가하였음.
+  Best Time to Buy and Sell Stock2.cpp
+  Best Time to Buy and Sell Stock3.cpp
+  풀이에 도움이 되는 코드 첨부함.
   class Solution {
 public:
     /*
@@ -64,3 +70,30 @@ public:
             }
         }
         return op; // return op 
+}
+//recursion
+int find(vector<int>& prices, int idx, int trx_num, bool buy, vector<vector<int>> & v){
+        //만약 더이상 거래를 할 수 없고, prices에 있는걸 다 썼을 때
+        if(idx >= prices.size() || trx_num <= 0) return 0;
+        
+        //caching
+        if(v[idx][buy] != -1) return v[idx][buy];
+        
+        
+        if(buy){//무언가 stock을 사야할 때
+            //다음번에는 이 주식을 팔아야 겠지. 현재 prices[idx]가격의 주식을 산거니까. 이게 -prices[i]+find(prices,idx+1, k, !buy, v)
+            //근데 바로 다음에 안팔고 그냥 넘어가! 이게 find(prices, idx+1, k, buy, v)이고.
+            return v[idx][buy] = max(-prices[i] + find(prices, idx+1, trx_num, !buy, v), find(prices, idx+1, trx_num, buy, v));
+            
+        }
+        else{
+            //이제 팔 시간이야. trx_num을 감소시켜야겠지 이게 prices[idx] + find(prices, idx+1, trx_num-1, !buy, v)이고
+            //find(prices, idx+1, k, buy, v)는 안팔고 그냥 다음으로 넘어간거지.
+            return v[idx][buy] = max(prices[idx] + find(prices,idx+1, trx_num-1, !buy, v), find(prices, idx+1, k, buy, v));
+        }
+    }
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        vector<vector<int>> v(n, vector<int>(2, -1));
+        return find(prices, 0, 1, 1, v);
+    }
