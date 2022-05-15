@@ -1,5 +1,8 @@
 1차 Fail 22-04-06
   너무 어려웠다.. 코드만 보면 별거 아니지만 트리쪽에 좀 약한거같다. 몇번을 봐도 아직 완벽하게 이해는 못했다.
+2차 Fail 22-05-15
+  요번에도 아얘 접근도 못함.
+  https://leetcode.com/problems/unique-binary-search-trees-ii/discuss/1440190/C%2B%2B-Python-Simple-and-Short-Recursive-Solutions-With-Explanation
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
