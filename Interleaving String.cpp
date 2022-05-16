@@ -2,6 +2,12 @@
 회고:
 BruteForce로 잘못짰었음. 애초에..
   
+2차 22-05-16 Fail
+회고:
+인덱스로 접근하는 것 까지는 잘 했으나
+기저조건과 i1, i2에 대한 예외처리를 잘 못 하였음.
+추가적으로, bool cache 2차원 배열로 사용하면 안됨. 왜냐하면 false라는 상태가 아직 안본상태이기도 하면서, 
+interleaving이 아닌 경우 두개를 의미하기 때문임.
   /*
   잘못짠 BruteForce
   bool help(string s1, string s2, string make, string s3){
@@ -107,5 +113,32 @@ public:
         vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
         bool ans=check(s1,s2,s3,0,0,0,dp);
         return ans;
+    }
+};
+
+//2차 풀이 수정 코드
+class Solution {
+public:
+    int cache[101][101];
+    bool isInterleave(string& s1, string& s2, string& s3, int i1, int i2, int i3){
+
+        
+        if(i1 == s1.length() and i2 == s2.length() and i3 == s3.length())
+            return true;
+        
+        int& ret = cache[i1][i2];
+        if(ret != -1)
+            return ret;
+        bool res = false;
+        
+        if(i1 != s1.length() and s1[i1] == s3[i3])
+            res |= isInterleave(s1, s2, s3, i1+1, i2, i3+1);
+        if(i2 != s2.length() and s2[i2] == s3[i3])
+            res |= isInterleave(s1, s2, s3, i1, i2+1, i3+1);
+        return ret = res;
+    }
+    bool isInterleave(string s1, string s2, string s3) {
+        memset(cache, -1, sizeof(cache));
+        return isInterleave(s1, s2, s3, 0, 0, 0);
     }
 };
