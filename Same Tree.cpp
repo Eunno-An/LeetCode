@@ -3,6 +3,8 @@
 시간: 6분
 Runtime: 0 ms, faster than 100.00% of C++ online submissions for Same Tree.
 Memory Usage: 10.1 MB, less than 7.39% of C++ online submissions for Same Tree.
+2차 22-05-17 Success
+시간: 4
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
