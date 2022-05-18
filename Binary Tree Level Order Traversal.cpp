@@ -6,7 +6,16 @@ Memory Usage: 13.2 MB, less than 14.20% of C++ online submissions for Binary Tre
 회고:
   map을 안사용해도 되고 while문 내부에서 처리가 가능하다.
   아래 코드 첨부.
-/**
+
+2차  22-05-18
+Time: 08분 26초
+Success
+Details 
+Runtime: 8 ms, faster than 36.81% of C++ online submissions for Binary Tree Level Order Traversal.
+Memory Usage: 12.6 MB, less than 32.63% of C++ online submissions for Binary Tree Level Order Traversal.
+회고:
+비교적 깔끔하게 
+	  /**
  * Definition for a binary tree node.
  * struct TreeNode {
  *     int val;
