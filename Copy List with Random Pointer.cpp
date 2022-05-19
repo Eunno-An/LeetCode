@@ -3,6 +3,7 @@ Time: 40분
 회고:
 1) bucket2의 역할을 떠올리기에서 애먹음
 2) 그리고 마지막 while문에 bucket2[head]->random을 해줬어야 했는데 next를 수정해줘서 시간 잡아먹음.
+Discussion참고해보니까, bucket1은 필요가 없을듯하다. 코드 첨부함.
 /*
 // Definition for a Node.
 class Node {
@@ -80,5 +81,27 @@ public:
         
         return bucket2[backupHead];
         
+    }
+};
+
+
+//Discussion 코드
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        map<Node*, Node*> m;
+        int i=0;
+        Node* ptr = head;
+        while (ptr) {
+            m[ptr] =new Node(ptr->val);
+            ptr = ptr->next;
+        }
+        ptr = head;
+        while (ptr) {
+            m[ptr]->next = m[ptr->next];
+            m[ptr]->random = m[ptr->random];
+            ptr = ptr->next;
+        }
+        return m[head];
     }
 };
