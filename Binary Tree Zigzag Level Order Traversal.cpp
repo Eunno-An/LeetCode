@@ -4,6 +4,13 @@ Success
 Details 
 Runtime: 0 ms, faster than 100.00% of C++ online submissions for Binary Tree Zigzag Level Order Traversal.
 Memory Usage: 11.9 MB, less than 93.28% of C++ online submissions for Binary Tree Zigzag Level Order Traversal.
+    
+2차 22-05-21
+Time: 16분
+Success
+Details
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Binary Tree Zigzag Level Order Traversal.
+Memory Usage: 12.2 MB, less than 47.10% of C++ online submissions for Binary Tree Zigzag Level Order Traversal.
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
