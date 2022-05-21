@@ -4,6 +4,13 @@ Success
 Details 
 Runtime: 15 ms, faster than 37.31% of C++ online submissions for Maximum Depth of Binary Tree.
 Memory Usage: 18.9 MB, less than 56.01% of C++ online submissions for Maximum Depth of Binary Tree.
+    
+2차 22-05-21
+Time: 1분
+Success
+Details
+Runtime: 4 ms, faster than 95.26% of C++ online submissions for Maximum Depth of Binary Tree.
+Memory Usage: 18.9 MB, less than 14.39% of C++ online submissions for Maximum Depth of Binary Tree.
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -39,5 +46,15 @@ public:
         if(root == NULL)
             return 0;
         return findMaxDepth(root, 0);
+    }
+};
+
+//2차 코드
+class Solution {
+public:
+    int maxDepth(TreeNode* root, int height = 0) {
+        if(root == NULL)
+            return height;
+        return max(maxDepth(root->left, height+1), maxDepth(root->right, height+1));
     }
 };
