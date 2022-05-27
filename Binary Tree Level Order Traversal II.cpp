@@ -16,6 +16,8 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+2차 22-05-27
+1차때 회고와 같다.
 class Solution {
  public:
         vector<vector<int>> levelOrderBottom(TreeNode* root) {
