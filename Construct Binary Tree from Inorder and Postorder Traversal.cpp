@@ -10,6 +10,9 @@
     ps(postorder의 start)부터, (le-ls)만큼이 왼쪽 subtree이고
     rightSubTree의 start는 leftpe에 1을 더한것,
     그리고 end는 pe -1이다.(루트가 끝에서 빠지므로!)
+2차 Fail
+22-05-27
+두개 매개 변수까지 잡자고 생각까진 했으나... 아 왜 실천을 안하니!!
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -52,7 +55,7 @@ public:
         while(inorder[i] != val) i++;
         TreeNode* root = new TreeNode(val);
         root->left = rec(inorder, postorder, is, i-1, ps, ps+i-is-1);
-        root->right = rec(inorder, postorder, i+1, ie, pe-(ie-i), pe-1);
+        root->right = rec(inorder, postorder, i+1, ie, pe-(ie-i), pe-1); // pe-ie+1을 ps+i-is로 해도 됨!
         return root;
     }
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
