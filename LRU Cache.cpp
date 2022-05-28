@@ -1,6 +1,7 @@
 1차 22-05-27 Fail
 splice의 개념을 알았다면 쉽게 풀 수 있었을 것.
 list의 사용방법 또한 숙지하지 않아 못푼 문제 같다.
+왜 iterator를 사용하는가? m[key]가 list에서 어디 위치에 있는지를 저장함.
 class LRUCache {
 public:
   /*
@@ -13,7 +14,7 @@ public:
   put와 get의 세부 구현에서 우선순위를 결정해야하는 문제가 있는데 이건 list로 해야한다.
   */
     list<pair<int, int>> l;
-    unordered_map<int, list<pair<int, int>>::iterator m;
+    unordered_map<int,list<pair<int, int>>::iterator> m;
     int size;
     
     LRUCache(int capacity) {
