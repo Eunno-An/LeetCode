@@ -19,6 +19,12 @@ public:
     
     해결방법:
     단순히 stack을 이용하면 된다!
+    
+    회고:
+    Discussion에서 엄청난 풀이들을 봤다...
+    1) Explicit Stack(내가 푼 풀이, 정말 스택을 사용 하는 것)
+    2) Implicit Stack(재귀를 통해 스택처럼 푸는 것)
+    3) 🎈Using Input vector as stack(주어진 input vector를 stack처럼 사용하는 것)
     */
     int evalRPN(vector<string>& tokens) {
         stack<string> bucket;
@@ -47,4 +53,33 @@ public:
         int ret = stoi(bucket.top());
         return ret;
     }
+    
+    
+    
+    
+    //3번 풀이
+    int evalRPN(vector<string>& tokens) {
+	int top = 0;
+	for(auto& t : tokens){ 
+        cout << "t:" << t << "and top : " << top <<  endl;   
+        /*
+t:2and top : 0
+t:1and top : 1
+t:+and top : 2
+t:3and top : 1
+t:*and top : 2
+        이거 결과가 좀 신기하다. Issue 로 남겨놓겠음.
+        */
+		if(t == "+" || t == "-" || t == "*" || t == "/") {
+			int op1 = stoi(tokens[--top]); 
+			int op2 = stoi(tokens[--top]); 
+			if(t == "+") op1 = op2 + op1;
+			if(t == "-") op1 = op2 - op1;
+			if(t == "/") op1 = op2 / op1;
+			if(t == "*") op1 = op2 * op1;   
+			tokens[top++] = to_string(op1);
+		}
+		else tokens[top++] = t;
+    }
+	return stoi(tokens[0]);
 };
