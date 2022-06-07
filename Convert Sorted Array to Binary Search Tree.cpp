@@ -5,6 +5,12 @@ Details
 Runtime: 15 ms, faster than 76.28% of C++ online submissions for Convert Sorted Array to Binary Search Tree.
 Memory Usage: 21.5 MB, less than 40.90% of C++ online submissions for Convert Sorted Array to Binary Search Tree.
 회고: mid를 nums[(s+e)/2]로 해서 시간을 잡아먹음. (s+e)/2인데..
+
+  
+2차 22-06-07
+Success
+Time: 10분 미만
+kotlin으로 해결하였음.
   /**
  * Definition for a binary tree node.
  * struct TreeNode {
