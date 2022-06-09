@@ -4,6 +4,9 @@ Success
 Details 
 Runtime: 16 ms, faster than 99.52% of C++ online submissions for Convert Sorted List to Binary Search Tree.
 Memory Usage: 28.4 MB, less than 32.85% of C++ online submissions for Convert Sorted List to Binary Search Tree.
+    
+2차 22-06-09
+코틀린으로 풀이하였음. 
 /**
  * Definition for singly-linked list.
  * struct ListNode {
