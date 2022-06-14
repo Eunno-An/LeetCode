@@ -21,6 +21,11 @@ if(leftH == MAX || rightH == MAX || abs(leftH-rightH) > 1)
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+            
+2차 22-06-14 
+Fail
+로직은 생각 했으나 이를 함수로 어케 해야될지 생각이 안났음.
+코틀린으로 풀어봄
 class Solution {
 public:
   /*
