@@ -26,6 +26,10 @@ if(leftH == MAX || rightH == MAX || abs(leftH-rightH) > 1)
 Fail
 로직은 생각 했으나 이를 함수로 어케 해야될지 생각이 안났음.
 코틀린으로 풀어봄
+왜 58번째 줄에서 leftH와 rightH를 MAX인지 check하는가?
+1을 root로 갖고 왼쪽과 오른쪽이 길게 2 3 4 5 를 길게 갖는 트리라고 생각해 보자. 대충 이런 모양이다(/ \)
+그럼 맨 밑에서 올라올 때 lh와 rh의 높이 차가 2인게 생기는데, 이때 잘못되었다고 flag를 세워야 한다.
+그게 MAX의 역할이다.
 class Solution {
 public:
   /*
