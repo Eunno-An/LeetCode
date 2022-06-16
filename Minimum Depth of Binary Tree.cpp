@@ -8,6 +8,10 @@ Memory Usage: 144.7 MB, less than 42.09% of C++ online submissions for Minimum D
 갱신할 때, 최소값을 갱신하는 경우, leftH와 rightH가 둘 다 초기값인 (100001)인 경우, leftH, rightH에 대한 예외처리를 따로 해주지 않으면 초기값을 리턴하게 됨. 결과는 잘못됨.
   return min(leftH, rightH) == 1000001 ? h + 1: min(leftH, rightH);
 이 코드를 통해 예외처리를 해주어야 한다.
+  
+2차 22-06-16
+Success
+Kotlin 사용
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
