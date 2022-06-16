@@ -42,6 +42,9 @@ Another example, 2^3 * 3^1 * 5^4 * 7^2 gives us 2^3 * 5^3 to make the max power 
     -> 그니까 주어진 n!을 5와 연관시키는것이지!
     -> 예로 들어 37!에는 37 * 36 * (35) * ... * (30) * ... * (25) * ... * (5) * ... * 1
     -> 아 똥마려
+예시참고
+https://leetcode.com/problems/factorial-trailing-zeroes/discuss/52373/Simple-CC++-Solution-(with-detailed-explaination)
+
     */
     int trailingZeroes(int n) {
         vector<pair<long long int, int>> fact(n+2, {0, 0});//pair<int, int> p->p.first = 0을 제외한 나머지 수, p.second = 0의 개수
