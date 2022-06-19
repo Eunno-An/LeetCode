@@ -37,6 +37,13 @@ Cache[i][j] = (i, j)부터 공주의 위치까지 가는데 필요한 기사의 
 저거 풀어서 쓴건데, 좋은 Discussion에서 풀이를 가져왔다.
 dungeon[i][j]의 값을 바로바로 수정하는 방식.
 
+🎈의문점
+왜 마지막에 abs, 절댓값을 씌워줄까?
+이는 https://leetcode.com/problems/dungeon-game/discuss/1498636/C%2B%2B-solution-with-image-explaination 여기를 참고하면 된다.
+만약 (0, 0)까지 왔을 때, dungeon[i][j] = -10이라고 해보자.
+얘는 공주 구할려고 10만큼 소모한 것이다.
+그렇다면 마지막에는 10 + 1이 있어야 겠지.
+
 /*
     
     // RECURSIVE APPROACH
