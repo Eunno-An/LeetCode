@@ -1,0 +1,58 @@
+2.
+class Solution {
+public:
+    int cache[51][51];
+    int solve(vector<vector<int>> &grid, vector<vector<int>>& moveCost, int row, int col){
+        //cout << row << ' ' << grid.size() << endl;
+        if(row == grid.size()-1){
+            //cout << nowCost << endl;
+            return grid[row][col];
+        }
+        int& ret = cache[row][col];
+        if(ret != 10000001)
+            return ret;
+        
+        for(int i=0; i<grid[0].size(); i++){
+            ret = min(ret, grid[row][col] + moveCost[grid[row][col]][i] + solve(grid, moveCost, row+1, i));
+        }
+        return ret;
+    }
+    int minPathCost(vector<vector<int>>& grid, vector<vector<int>>& moveCost) {
+        for(int i=0; i< 51; i++)
+            for(int j=0; j<51; j++)
+                cache[i][j] = 10000001;
+        int ret =  10000001;
+        for(int i=0; i<grid[0].size(); i++){
+            ret = min(ret, solve(grid, moveCost, 0, i) );
+        }
+        return ret;
+    }
+};
+
+3. 
+풀이 훨씬 간결하게 함.
+bags가 0번부터 k번까지 있다고 가정할때, 이를 각각 단계에서 어디에 넣을지를 결정만 하면 됨.
+knapsack문제.
+class Solution {
+public:
+    int help(vector<int>& cookies, vector<int>& bags, int k, int idx){
+        if(idx == cookies.size())
+            return *max_element(bags.begin(), bags.end());
+        int ret = 1000000001;
+        for(int i=0; i<k; i++){
+            bags[i]+=cookies[idx];
+            ret = min(ret, help(cookies, bags, k, idx+1));
+            bags[i]-=cookies[idx];
+        }
+        return ret;
+        
+    }
+    int distributeCookies(vector<int>& cookies, int k) {
+        vector<int> bags(k, 0);
+        return help(cookies, bags, k, 0);
+    }
+};
+
+4. 못풀었음
+아이디어는 대박이라는 생각밖에 안든다.
+좀만 더 생각하면 할 수 있엇을듯..
