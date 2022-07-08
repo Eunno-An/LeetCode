@@ -85,4 +85,47 @@ public:
     }
 };
 
-4.
+4.Fail
+k의 가정을 하고 들어가야 하는 문제!
+class Solution {
+public:
+    vector<int> canMakeIt(multiset<int>& st, int k){
+        if(k <= 0)
+            return {-1};
+        multiset<int> erased;
+        vector<int> ans;
+        while(st.size() > 0){
+            auto it = st.begin();
+            int val = *it;//y-k라고 가정.
+            int org = val + k;//y라고 가정
+            st.erase(st.find(val));//y-k를 지운다.
+            erased.insert(val);//y-k를 임시로 지워놓은거에다가 넣는다.
+            if(st.find(org + k) != st.end()){ // y+k가 있으면?
+                ans.push_back(org);//정답에 y를 넣고
+                st.erase(st.find(org+k));//set에서 y+k를 찾아서 지운다.
+                erased.insert(org + k);//erased에다가도 y+k를 넣는다.
+            }else{//이건 y+k가 없는거임. 이러면 k의 가정이 잘못되었으므로 함수를 끝낸다.
+                for(int x : erased)
+                    st.insert(x);
+                return {-1};
+            }
+        }
+        return ans;
+    }
+    vector<int> recoverArray(vector<int>& nums) {
+        sort(all(nums));
+        multiset<int> st(all(nums));
+        int smallest = nums[0];
+        for(int j = 1; j < nums.size(); j++){
+            int addi = smallest + nums[j];//addi는 (y-k)와 (y+k)가 더해졌다고 가정.
+            if(addi % 2 == 0){//가정에 의해 addi는 2의 배수일 수 밖에.
+                int org = addi / 2;//org = y라고 가정.
+                int k = nums[j] - org;//가정에 의해 k도 이렇게 정해짐.
+                vector<int> ans = canMakeIt(st, k);//k를 가정했으니, 나머지 요소들에 대해 검사.
+                if(ans[0] != -1)
+                    return ans;
+            }
+        }
+        return {-1};
+    }
+};
