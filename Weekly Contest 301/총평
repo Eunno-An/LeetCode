@@ -1,0 +1,80 @@
+1.
+모든 요소를 0으로 만들어 줄 때 까지
+amount vector를 sorint하면서 줄여주면 된다.
+class Solution {
+public:
+    int fillCups(vector<int>& amount) {
+        int count = 0;
+        while(*max_element(amount.begin(), amount.end()) != 0){
+            sort(amount.begin(), amount.end());
+            amount[2]--;
+            if(amount[1] > 0)
+                amount[1]--;
+            count++;
+        }
+        return count;
+        
+    }
+};
+
+2.
+
+class SmallestInfiniteSet {
+public:
+    set<int> s;
+    SmallestInfiniteSet() {
+        for(int i=1; i<=1000; i++)
+            s.insert(i);
+    }
+    
+    int popSmallest() {
+        int smallest = *(s.begin());
+        s.erase(*s.begin());
+        return smallest;
+    }
+    
+    void addBack(int num) {
+        s.insert(num);
+    }
+};
+
+3. Fail
+L과 R의 상대적인 순서를 v에다가 담아 놓음.
+target을 비교하면서 
+만약 
+1) start에서의 L이 target에서의 L보다 오른쪽에 있거나,
+2) start에서의 R이 target에서의 R보다 왼쪽에 있거나
+이 두 가지의 경우가 보이면 바로 false를 리턴하고
+
+끝까지 탐색을 할 경우 true를 리턴한다.
+class Solution {
+public:
+    bool canChange(string start, string target) {
+        vector<pair<char, int>> v;
+        for(int i=0; i<start.size(); i++){
+            if(start[i] == 'L' || start[i] == 'R')
+                v.push_back({start[i], i});
+        }
+        
+        int i =0;
+        for(int j=0; j<target.size(); j++){
+            if(target[j] == 'L' || target[j] == 'R'){//start에서 상응하는 element를 찾기.
+                if(i >= v.size() || v[i].first != target[j])
+                    return false;
+                else{
+                    if(v[i].fisrt == 'L' && v[i].second < j)
+                        return false;
+                    if(v[i].first == 'R' && v[i].second > j)
+                        return false;
+                    else
+                        i++;
+                }
+                
+            }
+        }
+        return i == v.size();
+    }
+};
+
+
+4. ㅈㅈ; 무슨 이딴문제가 다있어 ㄷ ㄷ;
