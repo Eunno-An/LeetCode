@@ -89,11 +89,17 @@ dp[i - forget] 사람들은 며칠 전에 잊어버린 비밀을 찾았고,
     }
 
 4. 7/15 다시 풀어봄. 
-cache 배열과 visit 배열을 동시에 사용하여 DP + DFS로 해결
+cache 배열과 visit 배열을 동시에 사용하여 DP + DFS로 해결 
+
+-> 👍생각해보니 visit 배열은 신경 안써도 될 것 같다.
+왜냐하면 1 3 이라는 보드판에서는 1->3->1로 가려면 increasing이라는 조건에 어긋나기 때문이다.
 브루트 포스 해결방법으로 시도, 시간초과 났음.
 cache[i][j] = i, j번째에서 시작하여 갈 수 있는 increasing Path의 개수.
 cache[i][j] = for i in 0..4 cache[i][j] += cache[i+dx[i]][j+dy[i]]
 또한 MOD도 신경써 주어야 한다.
+    
+    
+ ->
 class Solution {
 public:
     
@@ -101,31 +107,31 @@ public:
     const int MOD = 1000000007;
     const int dy[4] = {-1, 0, 1, 0};
     const int dx[4] = {0, 1, 0, -1};
-    bool canGo(vector<vector<int>>& grid, vector<vector<bool>>& visit, int y, int x){
-        return (y>=0 && y < grid.size() && x >= 0 && x < grid[0].size() && visit[y][x] == false) ? true : false;
+    bool canGo(vector<vector<int>>& grid, int y, int x){
+        return (y>=0 && y < grid.size() && x >= 0 && x < grid[0].size() ) ? true : false;
     }
-    int getPath(vector<vector<int>>& grid, vector<vector<bool>>& visit, int y, int x){
-        if(!canGo(grid, visit, y, x))
+    int getPath(vector<vector<int>>& grid,  int y, int x){
+        if(!canGo(grid,  y, x))
             return 0;
         int& ret = cache[y][x];
         if(ret != 0)
             return ret % MOD;
-        visit[y][x] = true;
+        
         for(int i=0; i<4; i++){
-            if(canGo(grid,visit, y+dy[i], x + dx[i]) && grid[y][x] < grid[y+dy[i]][x+dx[i]]){
-                ret += (getPath(grid, visit, y+dy[i], x+dx[i]) % MOD + 1) % MOD; 
+            if(canGo(grid, y+dy[i], x + dx[i]) && grid[y][x] < grid[y+dy[i]][x+dx[i]]){
+                ret += (getPath(grid, y+dy[i], x+dx[i]) % MOD + 1) % MOD; 
                 //cout << ret << endl;
             }
         }
-        visit[y][x] = false;
+        
         return ret;
     }
     int countPaths(vector<vector<int>>& grid) {
-        vector<vector<bool>> visit(grid.size(), vector<bool>(grid[0].size(), false));
+        
         int ret = 0;
         for(int i=0; i<grid.size(); i++){
             for(int j=0; j<grid[i].size(); j++){
-                cache[i][j] = getPath(grid, visit, i, j) % MOD;
+                cache[i][j] = getPath(grid, i, j) % MOD;
                 ret %= MOD;
                 ret += cache[i][j] % MOD;
                 //cout << cache[i][j] << endl;
