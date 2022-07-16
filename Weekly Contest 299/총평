@@ -1,0 +1,73 @@
+1.
+class Solution {
+public:
+    bool checkXMatrix(vector<vector<int>>& grid) {
+        for(int i=0; i<grid.size(); i++)
+            for(int j=0; j<grid[i].size(); j++){
+                if(i == j || i+j == grid.size()-1){
+                    if(grid[i][j] == 0)
+                        return false;
+                }else{
+                    if(grid[i][j] != 0)
+                        return false;
+                }
+            }
+        return true;
+    }
+};
+
+2.
+이건 좀 문제가 개떡같은 문제.
+집이 두개만 놓을 수 있는건지, 아닌지를 명확히 문제에 안나왔음.
+집은 두개 이상도 놓을 수 있음. 다만 인접해 있으면 안됨. 피보나치를 통해 피보나치의 제곱이 답임.
+class Solution {
+public:
+    /*
+    */
+    const int MOD = 1000000007;
+    int fibo[10001];
+    
+    int countHousePlacements(int n) {
+        /*
+        n=3
+        nothing->1
+        one-> 6
+        two-> 6
+        */
+        fibo[1] = 2;
+        fibo[2] = 3;
+        fibo[3] = 5;
+        if(n<=3)
+            return fibo[n]*fibo[n];
+        long long ret = 0;
+        for(int i = 4; i<=n; i++){
+            fibo[i] = fibo[i-1] % MOD + fibo[i-2] % MOD;
+            ret = (long long)fibo[i] * fibo[i] % MOD;
+        }
+        return ret;
+    }
+};
+3.Fail
+Kadane algorithm을 통해 설계할 수 있는 문제.
+Kadane algorithm은 maximum subarray를 찾을 때 O(n)만에 찾을 수 있는 문제이다.
+class Solution {
+public:
+    int score(vector<int>& a, vector<int>& b){
+        int runningSum = 0, maxi = 0;
+        int sum = accumulate(a.begin(), a.end(), 0);
+        for(int i=0; i<a.size(); i++){
+            runningSum += b[i]-a[i];
+            if(runningSum < 0)
+                runningSum = 0;
+            maxi = max(maxi, runningSum);
+        }
+        return sum + maxi;
+    }
+    int maximumsSplicedArray(vector<int>& nums1, vector<int>& nums2) {
+        return max(score(nums1, nums2), score(nums2, nums1));
+    }
+};
+4.Fail
+포기 ;;
+
+
