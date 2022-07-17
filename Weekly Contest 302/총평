@@ -1,0 +1,114 @@
+1.
+class Solution {
+public:
+    vector<int> numberOfPairs(vector<int>& nums) {
+        vector<int> ret(2, 0);
+        vector<int> numbers(101, 0);
+        for(int i=0; i<nums.size(); i++)
+            numbers[nums[i]]++;
+        
+        for(int i=0; i<numbers.size(); i++){
+            if(numbers[i] > 0){
+                ret[0] += numbers[i] / 2;
+                if(numbers[i]%2 == 1)
+                    ret[1]++;
+            }
+        }
+        return ret;
+            
+    }
+};
+
+2.
+그냥 pair 찾으려고 하면 시간초과 남.
+unordered_map의 key는 어떤 수의 각 자릿수 합.
+그리고 value는 pq로 해준 이유는 최적화 때문. 
+바로바로 두개의 가장 큰 요소를 뽑기 위함.
+class Solution {
+public:
+    int maximumSum(vector<int>& nums) {
+        unordered_map<int, priority_queue<int>> bucket;
+        int ret = -1;
+        for(int i=0; i<nums.size(); i++){
+            int now = nums[i];
+            int temp=0;
+            while(now != 0){
+                temp += now%10;
+                now/=10;
+            }
+            bucket[temp].push(nums[i]);
+        }
+        
+        for(auto p : bucket){
+            if(p.second.size() >= 2){
+                int first = p.second.top(); p.second.pop();
+                int second = p.second.top();
+                ret = max(ret, first + second);
+            }
+        }
+        return ret;
+    }
+};
+
+3.
+이건 좀 애매한데
+내가 풀었을 때는 분명히 1 초 안에 돌아갈 거 라고 생각했음. 뭔가 서버 오류때문에 TLE가 자꾸 난듯.
+class Solution {
+public:
+    
+    
+    vector<int> smallestTrimmedNumbers(vector<string>& nums, vector<vector<int>>& queries) {
+        //queries 순회. O(100)
+            //nums를 순회 O(100)
+                //splicing, O(100) 
+                //string to Integer O(100)
+                //vector temp push O(1)
+            //temp sorting O(10000log100)
+        vector<int> ret;
+        for(int i=0; i<queries.size(); i++){
+            int k = queries[i][0];
+            int trim = queries[i][1];
+            
+            vector<pair<string, int>> int_temp;
+            //cout << "ok!\n";
+            for(int j=0; j<nums.size(); j++){
+                string now = nums[j].substr(nums[j].size()-trim, trim);
+                int_temp.push_back({now, j});
+            }
+            sort(int_temp.begin(), int_temp.end());
+            
+            
+            
+            
+            ret.push_back(int_temp[k-1].second);
+        }
+        return ret;
+    }
+};
+
+4.Fail
+
+아.. GCD를 생각 못했따.. ㅋㅋㅋ
+class Solution {
+public:
+    int getGCD(int a, int b){
+        if(b==0)
+            return a;
+        return gcd(b, a % b);
+    }
+    int minOperations(vector<int>& nums, vector<int>& numsDivide) {
+        int GCD = numsDivide[0];
+        int ret = 1000000001;
+        int retIdx = -1;
+        for(int i=1; i<numsDivide.size(); i++){
+            GCD = getGCD(GCD, numsDivide[i]);
+        }
+        sort(nums.begin(), nums.end());
+        for(int i=0 ;i<nums.size(); i++){
+            if(GCD % nums[i] == 0){
+                return i;
+            }
+        }
+        return -1;
+    }
+};
