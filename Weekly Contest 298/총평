@@ -1,0 +1,85 @@
+1.
+//greatest의 의미는 그냥 단순히 .. 빈도가 가장 큰게 아니라 누가 가장 큰 알파벳인지를 나타내는 거였다.
+class Solution {
+public:
+    string greatestLetter(string s) {
+        vector<int> uppers(26, 0);
+        vector<int> lowers(26, 0);
+        for(int i=0; i<s.size(); i++){
+            if(isupper(s[i]))
+                uppers[s[i]-'A']++;
+            else
+                lowers[s[i]-'a']++;
+        }
+        for(int i=25; i>=0; i--)
+            if(uppers[i]!=0 && lowers[i]!=0)
+                return string(1, 'A' + i);
+        return "";
+        
+    }
+};
+
+2.이건 문제 질이 안좋음. 설명이 너무 애매함. pass
+3.
+sliding window
+그리고 몇개의 예외처리가 더 필요했던 문제.
+
+class Solution {
+public:
+    int longestSubsequence(string s, int k) {
+        string binary ="";
+        while(k!=0){
+            binary += (k%2 + '0');
+            k/=2;
+        }
+        reverse(binary.begin(), binary.end());
+        
+        if(binary.size() > s.size())
+            return s.size();
+        if(binary.size() == s.size())
+            return binary >=s ? s.size() : 0;
+        //k의 size만큼 window를 만들어서 s를 순회, 그리고 window의 맨 왼쪽 보다 더 왼쪽에 있는 s의 0의 개수를 세면 된다.
+        vector<int> zeros(s.size(), 0);
+        if(s[0] == '0') zeros[0] = 1;
+        for(int i=1; i<s.size(); i++){
+            zeros[i] = zeros[i-1] + (s[i] == '0' ? 1 : 0);
+            //cout << zeros[i] << ' ';
+        }
+        int ret = -1;
+        for(int i=1; i<s.size()-binary.size()+1; i++){
+            //binary또한 비교해야 한다. binary의 앞자리가 항상 1인 것은 보장되지만, 나머지 자리는 0과 1이 섞일 수도 있따. 
+            //만약 binary가 10001인데, s에서는 11111이면 sliding window로 해결되지 않는다. 그래서 binary의 나머지와 s를 비교해야한다.
+            //cout << s.substr(i, binary.size()) << endl;
+            if(binary >= s.substr(i, binary.size())){
+                if(ret < zeros[i-1])
+                    ret = zeros[i-1];
+            }
+        }
+        //cout << binary << endl;
+        return ret + binary.size();
+    }
+};
+
+4.Fail
+Bottom-up DP
+
+https://leetcode.com/problems/selling-pieces-of-wood/discuss/2168148/JavaC%2B%2BPython-Bottom-Up-DP
+
+class Solution {
+public:
+    long long sellingWood(int m, int n, vector<vector<int>>& prices) {
+        long long dp[201][201];
+        memset(dp, 0, sizeof(dp));
+        for(auto& p : prices)
+            dp[p[0]][p[1]]=p[2];
+        for(int w = 1; w <= m; w++){
+            for(int h=1; h<=n; h++){
+                for(int a = 1; a <= w/2; ++a)
+                    dp[w][h] = max(dp[w][h], dp[a][h] + dp[w-a][h]);
+                for(int a = 1; a <= h/2; ++a)
+                    dp[w][h] = max(dp[w][h], dp[w][a] + dp[w][h-a]);
+            }
+        }
+        return dp[m][n];
+    }
+};
