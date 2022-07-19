@@ -1,0 +1,152 @@
+1.
+class Solution {
+public:
+    int minMaxGame(vector<int>& nums) {
+        if(nums.size() == 1)
+            return nums[0];
+        int n = nums.size();
+        vector<int> newNums(n / 2, 0);
+        for(int i=0; i<n/2; i++){
+            if(i%2 == 0){
+                newNums[i] = min(nums[2 * i], nums[2 * i + 1]);
+            }
+            else{
+                newNums[i] = max(nums[2 * i], nums[2 * i + 1]);
+            }
+        }
+        return minMaxGame(newNums);
+    }
+};
+
+2. 
+Sorting + Greedy
+
+문제 자체로 보면 육두문자가 나오지만
+생각해보면 그리디로 풀 수 있는 문제.
+partition을 최소로 줄이는 문제이므로 
+정렬을 하고 각 요소를 partition에 넣을 수 있는지 없는지 확인하면 된다.
+좋은 문제.
+
+class Solution {
+public:
+    //1. nums에서 subsequence들을 만들고
+    //2. 그 subsequence들의 각각 max-min이 k이하인지 알아야 한다.
+    
+    int partitionArray(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int minNum = nums[0];
+        int partition=1;
+        for(int i=1; i<nums.size(); i++){
+            if(nums[i] - minNum > k){
+                minNum = nums[i];
+                partition++;
+            }
+        }
+        return partition;
+    }
+};
+
+3.
+HashMap
+좀 더 간결하게 짜려면
+for(int i = 0; i < operations.size(); i++) {
+            nums[mp[operations[i][0]]] = operations[i][1];
+            mp[operations[i][1]] = mp[operations[i][0]];
+            mp.erase(operations[i][0]);
+}
+이런 식으로 하면 될 듯 하다.
+
+class Solution {
+public:
+    vector<int> arrayChange(vector<int>& nums, vector<vector<int>>& operations) {
+        unordered_map<int, int> bucket;
+        vector<pair<int, int>> temp;
+        for(int i=0; i<nums.size(); i++)
+            bucket.insert({nums[i], i});
+        
+        for(int i=0; i<operations.size(); i++){
+            int target = operations[i][0];
+            int goal = operations[i][1];
+            
+            int targetIdx = bucket.find(target)->second;
+            bucket.erase(bucket.find(target));
+            bucket.insert({goal, targetIdx});
+        }
+        for(auto p : bucket)
+            temp.push_back({p.second, p.first});
+        sort(temp.begin(), temp.end());
+        vector<int> ret;
+        for(int i=0; i<temp.size(); i++){
+            ret.push_back(temp[i].second);
+        }
+        return ret;
+    }
+};
+4.
+두개의 스택 left, right를 이용하고,
+그리고 문자열 left를 따로 저장해서 cursorLeft와 cursorRight에 대해 빠르게 접근해주면 된다.
+class TextEditor {
+public:
+    /*
+    TextEditor() Initializes the object with empty text.
+    void addText(string text) Appends text to where the cursor is. The cursor ends to the right of text.
+    int deleteText(int k) Deletes k characters to the left of the cursor. Returns the number of characters actually deleted.
+    string cursorLeft(int k) Moves the cursor to the left k times. Returns the last min(10, len) characters to the left of the cursor, where len is                                 the number of characters to the left of the cursor.
+    string cursorRight(int k) Moves the cursor to the right k times. Returns the last min(10, len) characters to the left of the cursor, where len is                               the number of characters to the left of the cursor.
+ 
+    */
+    stack<char> front, behind;
+    string left="";
+    TextEditor() {
+    //hello world    
+    }
+    
+    void addText(string t) {
+        for(int i=0; i<t.size(); i++){
+            front.push(t[i]);
+            left += string(1, t[i]);
+        }
+        //cout << "afterAddText : " <<  left << endl;
+    }
+    
+    int deleteText(int k) {
+        int cnt = 0;
+        for(int i=0; i<k && !front.empty(); i++){
+            front.pop();
+            cnt++;
+            left.pop_back();
+        }
+        //cout << "afterDeleteText : " <<  left << endl;
+        return cnt;
+    }
+    
+    string cursorLeft(int k) {
+        for(int i=0; i<k && !front.empty(); i++){
+            char t = front.top(); front.pop();
+            behind.push(t);
+            left.pop_back();
+        }
+        //cout << "afterCursorLeft : " << left << endl;
+        return (left.size() < 10 ? left : left.substr(left.size()-10, 10));
+        
+    }
+    
+    string cursorRight(int k) {
+        for(int i=0; i<k && !behind.empty(); i++){
+            char t = behind.top(); behind.pop();
+            front.push(t);
+            left.push_back(t);
+        }
+        //cout << "afterCursorRight : " << left << endl;
+        return (left.size() < 10 ? left : left.substr(left.size()-10, 10));
+    }
+};
+
+/**
+ * Your TextEditor object will be instantiated and called as such:
+ * TextEditor* obj = new TextEditor();
+ * obj->addText(text);
+ * int param_2 = obj->deleteText(k);
+ * string param_3 = obj->cursorLeft(k);
+ * string param_4 = obj->cursorRight(k);
+ */
