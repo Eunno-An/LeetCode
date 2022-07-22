@@ -1,0 +1,170 @@
+1.
+target의 문자들의 세트를 s에서 몇 세트 찾을 수 있는지 확인하는 문제.
+
+class Solution {
+public:
+    int rearrangeCharacters(string s, string target) {
+        vector<int> lowers_target(27, 0);
+        vector<int> lowers_s(27, 0);
+        for(int i=0; i<target.size(); i++){
+            int a = int(target[i]-'a');
+            lowers_target[a]++;
+        }
+        
+        for(int i=0; i<s.size(); i++){
+            int a = int(s[i]-'a');
+            lowers_s[a]++;
+        }
+        //cout << "ok\n";
+        int ret = 101;
+        for(int i=0; i<lowers_target.size(); i++){
+            if(lowers_target[i]!= 0)
+                ret = min(ret, lowers_s[i]/lowers_target[i]);
+        }
+        return ret;
+        
+    }
+};
+
+2.
+stringstream을 이용한 setprecision 방법을 알았으면 훨씬 수월하게 풀었을 것
+Issue에 남겨 놓겠음.
+class Solution {
+public:
+    bool isValid(string& s){
+        if(s[0]!='$' || s == "$")
+            return false;
+        for(int i=1; i<s.size(); i++)
+            if(!isdigit(s[i]))
+                return false;
+        return true;
+    }
+    string discountPrices(string sentence, int discount) {
+        stringstream ss(sentence);
+        string temp;
+        vector<string> bucket;
+        while(getline(ss, temp, ' '))
+            bucket.push_back(temp);
+        
+        for(int i=0; i<bucket.size(); i++){
+            if(isValid(bucket[i])){
+                string t = (string)bucket[i].substr(1);
+                
+                    
+                long dollar = stol(t);
+                
+                dollar = dollar * (100-discount);
+                //cout << dollar << endl;
+                int decimal = dollar % 100;
+                string s_decimal = "";
+                if(decimal == 0)//decimal이 0인 경우
+                    s_decimal = "00";
+                else if(decimal< 10)//10 이하인 경우
+                    s_decimal = '0' + to_string(decimal);
+                else
+                    s_decimal = to_string(decimal);
+                dollar /= 100;
+                string s_dollar = to_string(dollar);
+                
+                
+                string result = '$' + s_dollar + '.' + s_decimal;
+                
+                bucket[i] = result;
+            }
+        }
+        string ret = "";
+        for(int i=0; i<bucket.size(); i++){
+            ret += bucket[i];
+            ret += ' ';
+        }
+        ret.pop_back();
+        return ret;
+    }
+};
+3.Fail
+
+꼭 참고해야 할 점
+map 객체 mp를 이용하여
+end(mp)
+그리고 iterator 객체 it을 이용하여
+next(it) 한 것도 참고하자.
+O(nlogn)구현 방법. O(n)방법도 있는데 진짜 무진장 어렵다...슈발..
+```
+class Solution {
+public:
+    using pi = pair<int, int>;
+    int totalSteps(vector<int>& nums) {
+        int N = nums.size();
+        map<int, int> mp; // key = index, value = val
+        vector<pi> del; // stores(prev idx, toDel idx)
+        for(int i=0; i<N; i++){
+            mp[i] = nums[i];
+            if(i+1 < N && nums[i] > nums[i+1])
+                del.emplace_back(i, i+1);
+        }
+        
+        int ans = 0;
+        while(!del.empty()){
+            ++ans;
+            vector<pi> nxt;
+            for(auto [i, j] : del) mp.erase(j);
+            for(auto [i, j] : del){
+                auto it = mp.find(i);
+                if(it == end(mp) || next(it) == end(mp))//if it`s not in the map anymore, or if it`s the last element, skip it
+                    continue;
+                auto itn = next(it);//now compare aginst next element in the ordering
+                if(it->second > itn->second)
+                    nxt.emplace_back(it->first, itn->first);
+                
+            }
+            swap(nxt, del);
+        }
+        return ans;
+    }
+};
+```
+4.Fail
+DP가 될 줄 알았으나 왜 안됐을 까 모르겠다.
+y, x범위가 너무 커서 2차원 배열에는 담을 수 없어서
+map<pair<int, int>, int>를 이용했는데, 뭔가 빼먹은 부분이 있는 거 같다.
+
+해결방법은 다익스트라 풀이이다.
+BFS와 다익스트라 차이
+BFS는 두 점 간의 '최단 경로'를 찾는다고 했는데, 이때의 '최단 경로'란 가장 적은 수의 구간(edge)을 가지는 경로이다.
+하지만 다익스트라 알고리즘은 각 구간에 대해 숫자 혹은 가중치를 줄 수 있다. 그리고 전체 가중치의 합이 가장 작은 구간을 찾는다.
+출처: https://rhange.tistory.com/215 [The Think:티스토리]
+
+
+class Solution {
+public:
+    
+    
+    int minimumObstacles(vector<vector<int>>& grid) {
+        int m = grid.size(), n = grid[0].size();
+        vector<int> dir = {0, 1, 0, -1, 0};
+        vector<vector<int>> dist(m, vector<int>(n, INT_MAX));
+        dist[0][0] = 0;
+        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>> > pq;
+        pq.push({0, {0, 0}});
+        while(!pq.empty()){
+            auto  v = pq.top();
+            pq.pop();
+            int i = v.second.first, j = v.second.second, d = v.first;
+            for(int k =0; k <4; k++){
+                int x = i + dir[k], y = j + dir[k+1];
+                if(x < 0 || x >=m || y < 0 || y >= n )continue;
+                int wt;
+                if(grid[x][y] ==1)
+                    wt = 1;
+                else
+                    wt = 0;
+                
+                if(d + wt < dist[x][y]){
+                    dist[x][y] = d + wt;
+                    pq.push({dist[x][y], {x, y}});
+                }
+            }
+        }
+        return dist[m-1][n-1];
+    }
+};
