@@ -1,0 +1,83 @@
+1.
+class Solution {
+public:
+    
+    int percentageLetter(string s, char letter) {
+        int count = 0;
+        for(int i=0; i<s.size(); i++)
+            if(s[i] == letter)
+                count++;
+        return count * 100 / s.size();
+    }
+};
+
+1번은 이렇게 줄일 수  있다.
+int percentageLetter(string s, char letter) {
+    return 100 * count(begin(s), end(s), letter) / s.size();
+}
+
+2.
+class Solution {
+public:
+    int maximumBags(vector<int>& capacity, vector<int>& rocks, int additionalRocks) {
+        for(int i=0; i<capacity.size(); i++)
+            capacity[i] -= rocks[i];
+        sort(capacity.begin(), capacity.end());
+        int count = 0;
+        for(int i=0; i<capacity.size(); i++){
+            if(capacity[i]!=0){
+                additionalRocks -= capacity[i];
+                if(additionalRocks < 0)
+                    break;
+                
+            }
+            count++;
+        }
+        return count;
+    }
+};
+3.
+중요! double에서 4999998/4999999은 1로 나오는데, 이는 double의 precision을 넘어갔기 때문??
+그래서 long double을 쓰거나,
+다른 풀이로는 long을 써서 곱으로 해결해주어야 한다.
+class Solution {
+public:
+    double absTolerance = (1.0e-8);
+    static bool cmp(vector<int>& a, vector<int>& b){
+        return a[0] < b[0];
+    }
+    pair<int, int> getTilt(vector<int>& a, vector<int>& b){
+        return (a[1] == b[1] ? make_pair(0, 0) : make_pair(b[1]-a[1], b[0]-a[0]));
+    }
+    void printTilt(pair<int, int> a){
+        cout << a.second <<  ' ' << a.first << endl;
+    }
+    bool checkSameTilt(pair<int, int>& a, pair<int, int>& b){
+        
+        long double first = (a.first == 0 ? 0 : a.second / (long double)a.first);
+        long double second = (b.first == 0 ? 0 : b.second / (long double)b.first);
+        return first == second;
+            
+        
+    }
+    int minimumLines(vector<vector<int>>& stockPrices) {
+        if(stockPrices.size() == 1)
+            return 0;
+        
+        
+        sort(stockPrices.begin(), stockPrices.end(), cmp);
+        pair<int, int> tilt = getTilt(stockPrices[0], stockPrices[1]);
+        int count = 1;
+        //printTilt(tilt);
+        for(int i=1; i+1 < stockPrices.size(); i++){
+            pair<int, int> nowTilt = getTilt(stockPrices[i], stockPrices[i+1]);
+            if(!checkSameTilt(tilt, nowTilt)){
+                count++;
+                tilt = nowTilt;
+            }
+            //printTilt(nowTilt);
+        }
+        return count;
+    }
+};
+4.Fail 존나 어렵다. 아마존 무슨 시험이라는데..
